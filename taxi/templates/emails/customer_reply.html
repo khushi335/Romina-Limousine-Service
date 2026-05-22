@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0; }
+        .wrapper { width: 100%; padding: 40px 0; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 4px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .top-bar { background-color: #002e5d; height: 8px; }
+        .header { padding: 40px 20px; text-align: center; background-color: #ffffff; }
+        .header h1 { color: #002e5d; margin: 0; font-size: 26px; font-weight: 800; letter-spacing: 2px; }
+        .header p { color: #c4a457; margin: 5px 0 0; font-weight: bold; text-transform: uppercase; font-size: 12px; letter-spacing: 4px; }
+        .body-content { padding: 0 50px 40px; color: #444; line-height: 1.8; text-align: center; }
+        .body-content h2 { color: #333; font-size: 20px; margin-bottom: 20px; }
+        .divider { width: 40px; height: 2px; background-color: #c4a457; margin: 20px auto; }
+        .details-summary { background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: left; border: 1px solid #eee; }
+        .details-summary p { margin: 5px 0; font-size: 14px; }
+        .cta-button { display: inline-block; padding: 16px 35px; background-color: #002e5d; color: #ffffff !important; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; text-transform: uppercase; margin: 20px 0; }
+        .footer { padding: 30px; background-color: #fdfdfd; text-align: center; border-top: 1px solid #eee; }
+        .footer-text { color: #999; font-size: 12px; margin-bottom: 10px; }
+        .contact-links { font-size: 13px; color: #002e5d; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="top-bar"></div>
+            
+            <div class="header">
+                <h1>COLUMBIA LIMOZ</h1>
+                <p>Premium Transportation</p>
+            </div>
+
+            <div class="body-content">
+                <h2>Message Received</h2>
+                <div class="divider"></div>
+                <p>Dear <strong>{{ name }}</strong>,</p>
+                <p>Thank you for reaching out to Columbia Limozn Service. We have successfully received your inquiry and our dispatch team is currently reviewing the details.</p>
+                
+                <div class="details-summary">
+                    <p><strong>Subject:</strong> {{ subject }}</p>
+                    <p><strong>Inquiry Date:</strong> January 26, 2026</p>
+                </div>
+
+                <p>We pride ourselves on prompt service and will get back to you with a formal response or quote within the next 24 hours.</p>
+                
+                <a href="tel:(410) 365-5556" class="cta-button">Call Dispatch Now</a>
+                
+                <p style="font-size: 13px; color: #888;">If your request is urgent, please call us directly for immediate assistance.</p>
+            </div>
+
+            <div class="footer">
+                <p class="footer-text">9019 Early April Way.</p>
+                <div class="contact-links">
+                    (410) 365-5556 &nbsp; | &nbsp; columbialimoznservice.com
+                </div>
+                <p class="footer-text" style="margin-top: 20px;">&copy; 2026 Columbia Limoz Service. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container text-center py-5">
+    <h2 class="text-success">Reservation Submitted Successfully ✅</h2>
+    <p>Thank you for booking with us. We will contact you shortly.</p>
+    <a href="{% url 'reservation' %}" class="btn btn-primary mt-3">Make Another Reservation</a>
+</div>
+{% endblock %}

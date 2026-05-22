@@ -1,0 +1,229 @@
+/* ================== Variables ================== */
+:root {
+  --primary-color: #997A80;
+  --secondary-color: #293039;
+  --background-light: #EAEODC;
+  --background-alt: #A4B5C3;
+  --accent-color: #731211;
+  --white: #ffffff;
+  --text-dark: #222;
+  --error-color: #e63946;
+}
+
+/* ================== Base Reset & Layout ================== */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: var(--background-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ================== Form Container ================== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--secondary-color);
+  padding: 30px;
+  width: 450px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ================== Form Labels ================== */
+.flex-column > label {
+  color: var(--white);
+  font-weight: 600;
+}
+
+/* ================== Input Group ================== */
+.inputForm {
+  border: 1.5px solid var(--primary-color);
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  background-color: var(--primary-color);
+  transition: border 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.inputForm:focus-within {
+  border-color: var(--accent-color);
+}
+
+.inputForm.error {
+  border-color: var(--error-color);
+}
+
+/* Validation: error border for invalid fields */
+.inputForm:has(input:invalid) {
+  border-color: var(--error-color);
+}
+
+/* Input field */
+.input {
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent; /* Transparent so background of container shows */
+  color: var(--white);
+  font-size: 15px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+::placeholder {
+  color: #eee;
+}
+
+/* Error message style */
+.error-message {
+  font-size: 13px;
+  color: var(--error-color);
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
+/* ================== Eye Icon ================== */
+.inputForm i.fa-eye,
+.inputForm i.fa-eye-slash {
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+  color: var(--white);
+}
+
+/* ================== Flex Row (Checkbox + Forgot) ================== */
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.flex-row > div > label {
+  font-size: 14px;
+  color: var(--white);
+  font-weight: 400;
+}
+
+/* ================== Links (Forgot Password / Sign Up) ================== */
+.span {
+  font-size: 14px;
+  color: var(--primary-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.span:hover {
+  color: #500c0b;
+}
+
+/* ================== Submit Button ================== */
+.button-submit {
+  margin: 20px 0 10px 0;
+  background-color: var(--accent-color);
+  border: none;
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button-submit:hover {
+  background-color: #5a0e0d;
+}
+
+/* ================== Paragraph Text ================== */
+.p {
+  text-align: center;
+  color: var(--white);
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.p a.span {
+  text-decoration: none;
+}
+
+/* ================== Social Login Buttons ================== */
+.btn {
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  gap: 15px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--background-alt);
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s;
+  padding: 0 15px;
+  justify-content: flex-start;
+}
+
+.social-btn.github {
+  background-color: #3b5998; /* GitHub brand color */
+}
+
+.social-btn.github:hover {
+  background-color: #2d4373;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent-color);
+}
+
+.social-btn.google {
+  background-color: #db4437;
+  color: #fff;
+}
+
+.social-btn.google:hover {
+  background-color: #c23321;
+}
+
+.btn i {
+  font-size: 18px;
+}
+
+/* ================== Responsive ================== */
+@media (max-width: 500px) {
+  .form {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .flex-row {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .success-section {
+        padding: 100px 20px;
+        background: #f8f9fa;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+    }
+    .success-card {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 50px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    .success-icon {
+        font-size: 60px;
+        color: #28a745;
+        margin-bottom: 20px;
+    }
+    .success-card h1 {
+        color: #1a1f36;
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+    .success-card p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+    .btn-home {
+        background: #1a1f36;
+        color: white;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+    .btn-home:hover {
+        background: #f9d423;
+        color: #1a1f36;
+    }
+    .support-text {
+        margin-top: 30px;
+        font-size: 14px;
+        color: #999;
+    }
+</style>
+
+<div class="success-section">
+    <div class="success-card">
+        <div class="success-icon">✓</div>
+        <h1>Reservation Received!</h1>
+        <p>Thank you for choosing Columbia Limousine Service. We have sent a confirmation email to your inbox. Our dispatch team is reviewing your details and will monitor your flight for any changes.</p>
+        
+        <a href="{% url 'index' %}" class="btn-home">Return to Home</a>
+        
+        <div class="support-text">
+            Need immediate assistance? <br>
+            <strong>Call or Text: 443 860 1286</strong>
+        </div>
+    </div>
+</div>
+{% endblock %}

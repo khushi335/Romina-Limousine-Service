@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Reservation Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            font-size: 14px;
+        }
+        h2 {
+            color: #4A90E2;
+            text-align: center;
+        }
+        .details {
+            margin-top: 20px;
+        }
+        .details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .details th, .details td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h2>Car Reservation Receipt</h2>
+
+    <p>Hello {{ reservation.email }},</p>
+    <p>Thank you for booking with us. Below are your reservation details:</p>
+
+    <div class="details">
+        <table>
+            <tr>
+                <th>Car Type</th>
+                <td>{{ reservation.car_type }}</td>
+            </tr>
+            <tr>
+                <th>Pick-Up Location</th>
+                <td>{{ reservation.pick_up_location }}</td>
+            </tr>
+            <tr>
+                <th>Drop-Off Location</th>
+                <td>{{ reservation.drop_off_location }}</td>
+            </tr>
+            <tr>
+                <th>Pick-Up Date & Time</th>
+                <td>{{ reservation.pick_up_date }} at {{ reservation.pick_up_time }}</td>
+            </tr>
+            <tr>
+                <th>Drop-Off Date & Time</th>
+                <td>{{ reservation.drop_off_date }} at {{ reservation.drop_off_time }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ reservation.email }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="footer">
+        This is an automated receipt. Please contact support if you have any questions.
+    </div>
+</body>
+</html>

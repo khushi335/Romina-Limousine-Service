@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Our Elite Services - Romina Limousine Service{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    :root {
+        --primary-navy: #0f172a; 
+        --luxury-gold: #e2b04a; 
+        --soft-white: #ffffff;
+        --text-slate: #475569;
+        --border-color: #e2e8f0;
+        --light-slate: #f8fafc;
+    }
+
+    .bg-breadcrumb {
+        background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('{% static "img/breadcrumb-bg.jpg" %}') center center no-repeat;
+        background-size: cover;
+        padding: 100px 0 60px 0;
+    }
+
+    .breadcrumb-item a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .breadcrumb-item a:hover {
+        color: var(--luxury-gold);
+    }
+
+    .breadcrumb-item.active {
+        color: var(--luxury-gold) !important;
+    }
+
+    /* Core Service Row Layout Structure */
+    .service-feature-row {
+        align-items: center;
+        padding: 40px 0;
+    }
+
+    .service-media-panel {
+        position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+        aspect-ratio: 16 / 10;
+    }
+
+    .service-media-panel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .service-feature-row:hover .service-media-panel img {
+        transform: scale(1.04);
+    }
+
+    .service-text-panel {
+        padding: 20px;
+    }
+
+    .service-tag {
+        font-weight: 700;
+        color: var(--luxury-gold);
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    .service-heading {
+        color: var(--primary-navy);
+        font-weight: 800;
+        font-size: 32px;
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    .service-description {
+        color: var(--text-slate);
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 28px;
+    }
+
+    /* Value Pillars Matrix */
+    .pillar-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--light-slate);
+        border: 1px solid var(--border-color);
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--primary-navy);
+        margin-right: 8px;
+        margin-bottom: 12px;
+    }
+
+    .pillar-pill i {
+        color: var(--luxury-gold);
+    }
+
+    /* Action Buttons */
+    .btn-service-action {
+        background: var(--primary-navy);
+        color: var(--soft-white);
+        font-weight: 700;
+        font-size: 14px;
+        padding: 12px 28px;
+        border-radius: 12px;
+        border: 1px solid var(--primary-navy);
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .btn-service-action:hover {
+        background: var(--luxury-gold);
+        color: var(--primary-navy);
+        border-color: var(--luxury-gold);
+        box-shadow: 0 8px 20px rgba(226, 176, 74, 0.25);
+    }
+
+    /* Summary CTA Ribbon */
+    .cta-ribbon-box {
+        background: var(--primary-navy);
+        border-radius: 32px;
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+        color: var(--soft-white);
+    }
+
+    .cta-ribbon-box h2 {
+        font-weight: 700;
+    }
+
+    .btn-ribbon-gold {
+        background: var(--luxury-gold);
+        color: var(--primary-navy);
+        font-weight: 700;
+        padding: 14px 36px;
+        border-radius: 12px;
+        border: none;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-ribbon-gold:hover {
+        background: #f1c260;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(226, 176, 74, 0.3);
+        color: var(--primary-navy);
+    }
+
+    @media (max-width: 991px) {
+        .service-feature-row {
+            padding: 24px 0;
+        }
+        .service-heading {
+            font-size: 26px;
+            margin-top: 15px;
+        }
+        /* Keep simple clean stack behavior order natively handled by Bootstrap row reverse mobile tags if needed */
+    }
+</style>
+
+<!-- Header Start -->
+<div class="container-fluid bg-breadcrumb">
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Chauffeur Services</h4>
+        <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active">Services</li>
+        </ol>   
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Services Matrix Area Start -->
+<div class="container-fluid py-5">
+    <div class="container py-4">
+        
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+            <h1 class="display-5 text-capitalize mb-3" style="color: var(--primary-navy); font-weight: 700;">World-Class Transportation</h1>
+            <p class="mb-0 text-muted">Exacting precision, meticulous logistics, and immaculate, clean high-end vehicles serving demanding corporate partners and discerning private travelers alike.</p>
+        </div>
+
+        <!-- Service Segment 1: Airport Transfers -->
+        <div class="row service-feature-row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-media-panel">
+                    <img src="{% static 'img/service.jpg' %}" alt="Airport Luxury Transfer Terminal Support">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-text-panel">
+                    <span class="service-tag">Punctual & Reliable</span>
+                    <h2 class="service-heading">Corporate Airport Transfers</h2>
+                    <p class="service-description">We closely follow commercial aviation and private charter flight feeds in real time to match scheduling shifts. Your dedicated chauffeur stands ready exactly as you clear the arrival lounge, offering seamless curb management or terminal gate meet-and-greet execution.</p>
+                    
+                    <div class="mb-4">
+                        <span class="pillar-pill"><i class="fa fa-plane-arrival"></i> Live Flight Tracking</span>
+                        <span class="pillar-pill"><i class="fa fa-id-card"></i> Meet & Greet</span>
+                        <span class="pillar-pill"><i class="fa fa-clock"></i> Complimentary Wait Time</span>
+                    </div>
+
+                    <a href="{% url 'make_reservation' %}" class="btn-service-action">Reserve Transfer</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Segment 2: Hourly Charter (Order Reversed on Desktop for Alternating Visual Matrix Layout) -->
+        <div class="row service-feature-row g-5 flex-column-reverse flex-lg-row mt-4">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-text-panel">
+                    <span class="service-tag">Total Flexibility</span>
+                    <h2 class="service-heading">Hourly & As-Directed Charters</h2>
+                    <p class="service-description">Retain complete command over a fluid schedule. With our premium hourly service, your chauffeur remains on-site and instantly available for back-to-back corporate roadshows, sudden multi-destination updates, or executive meetings around town.</p>
+                    
+                    <div class="mb-4">
+                        <span class="pillar-pill"><i class="fa fa-sync"></i> Unlimited Stops</span>
+                        <span class="pillar-pill"><i class="fa fa-user-shield"></i> Dedicated Chauffeur</span>
+                        <span class="pillar-pill"><i class="fa fa-map-marked-alt"></i> Route Optimization</span>
+                    </div>
+
+                    <a href="{% url 'make_reservation' %}" class="btn-service-action">Book As-Directed</a>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-media-panel">
+                    <img src="{% static 'img/hourly.jpg' %}" alt="Hourly Dedicated Executive Luxury Logistics">
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Segment 3: Special Events -->
+        <div class="row service-feature-row g-5 mt-4">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-media-panel">
+                    <img src="{% static 'img/events.jpg' %}" alt="Special Event Elite Chauffeured Transport">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-text-panel">
+                    <span class="service-tag">Unforgettable Moments</span>
+                    <h2 class="service-heading">Special Events & Gala Gala Execution</h2>
+                    <p class="service-description">From high-profile weddings and premium sports hospitality events to VIP red-carpet galas, we deliver a beautifully styled arrival. Our team custom-builds vehicle deployment flows so hosts and distinguished guests experience seamless transitions.</p>
+                    
+                    <div class="mb-4">
+                        <span class="pillar-pill"><i class="fa fa-glass-cheers"></i> Wedding Staging</span>
+                        <span class="pillar-pill"><i class="fa fa-star"></i> Red Carpet Layouts</span>
+                        <span class="pillar-pill"><i class="fa fa-users"></i> Large Group Logistics</span>
+                    </div>
+
+                    <a href="{% url 'make_reservation' %}" class="btn-service-action">Arrange Event Travel</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Action Ribbon Wrapper Box -->
+        <div class="cta-ribbon-box text-center p-5 mt-5 mx-0 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="py-4 px-2">
+                <h2 class="display-6 mb-3">Require a Custom Enterprise Program?</h2>
+                <p class="mb-4 text-white-50 mx-auto" style="max-width: 650px;">Connect with our corporate accounts desk to establish high-frequency route pipelines, unified recurring billing configurations, or multi-city event support programs.</p>
+                <a href="{% url 'contact' %}" class="btn-ribbon-gold">Inquire For Enterprise</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Services Matrix Area End -->
+{% endblock %}

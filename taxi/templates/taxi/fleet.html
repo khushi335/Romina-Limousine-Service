@@ -1,0 +1,427 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Our Luxury Fleet - Romina Limousine Service{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    :root {
+        --primary-navy: #0f172a; 
+        --luxury-gold: #e2b04a; 
+        --soft-white: #ffffff;
+        --text-slate: #475569;
+        --border-color: #e2e8f0;
+        --card-bg-hover: rgba(15, 23, 42, 0.02);
+    }
+
+    .bg-breadcrumb {
+        background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('{% static "img/breadcrumb-bg.jpg" %}') center center no-repeat;
+        background-size: cover;
+        padding: 100px 0 60px 0;
+    }
+
+    .breadcrumb-item a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .breadcrumb-item a:hover {
+        color: var(--luxury-gold);
+    }
+
+    .breadcrumb-item.active {
+        color: var(--luxury-gold) !important;
+    }
+
+    /* Fleet Filter Section */
+    .filter-btn-group .btn {
+        border-radius: 30px;
+        padding: 10px 24px;
+        font-weight: 600;
+        font-size: 14px;
+        border: 1px solid var(--border-color);
+        background: var(--soft-white);
+        color: var(--primary-navy);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .filter-btn-group .btn:hover, 
+    .filter-btn-group .btn.active {
+        background: var(--primary-navy);
+        color: var(--luxury-gold);
+        border-color: var(--primary-navy);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+    }
+
+    /* Fleet Card Architecture */
+    .fleet-card {
+        background: var(--soft-white);
+        border-radius: 24px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fleet-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+        border-color: rgba(226, 176, 74, 0.3);
+    }
+
+    .fleet-img-container {
+        position: relative;
+        overflow: hidden;
+        background: #f8fafc;
+        aspect-ratio: 16 / 10;
+    }
+
+    .fleet-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fleet-card:hover .fleet-img-container img {
+        transform: scale(1.06);
+    }
+
+    .fleet-badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: var(--primary-navy);
+        color: var(--luxury-gold);
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 6px 16px;
+        border-radius: 30px;
+        border: 1px solid rgba(226, 176, 74, 0.2);
+        z-index: 2;
+    }
+
+    .fleet-content {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .fleet-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--primary-navy);
+        margin-bottom: 8px;
+        transition: color 0.3s;
+    }
+
+    .fleet-card:hover .fleet-title {
+        color: var(--luxury-gold);
+    }
+
+    .fleet-subtitle {
+        font-size: 14px;
+        color: var(--text-slate);
+        margin-bottom: 20px;
+    }
+
+    /* Specs Grid */
+    .fleet-specs-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 16px 0;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 24px;
+    }
+
+    .spec-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--text-slate);
+    }
+
+    .spec-item i {
+        color: var(--luxury-gold);
+        width: 16px;
+        text-align: center;
+    }
+
+    /* Action Buttons */
+    .fleet-actions {
+        margin-top: auto;
+        display: flex;
+        gap: 12px;
+    }
+
+    .btn-fleet-primary {
+        background: var(--primary-navy);
+        color: var(--soft-white);
+        font-weight: 700;
+        border-radius: 12px;
+        padding: 12px 20px;
+        border: 1px solid var(--primary-navy);
+        transition: all 0.3s;
+        flex-grow: 1;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-fleet-primary:hover {
+        background: var(--luxury-gold);
+        color: var(--primary-navy);
+        border-color: var(--luxury-gold);
+        box-shadow: 0 8px 20px rgba(226, 176, 74, 0.25);
+    }
+
+    .btn-fleet-secondary {
+        background: transparent;
+        color: var(--primary-navy);
+        font-weight: 600;
+        border-radius: 12px;
+        padding: 12px 20px;
+        border: 1px solid var(--border-color);
+        transition: all 0.3s;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-fleet-secondary:hover {
+        background: #f8fafc;
+        border-color: var(--primary-navy);
+    }
+
+    /* Banner Feature block */
+    .experience-banner {
+        background: var(--primary-navy);
+        border-radius: 32px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+    }
+
+    .experience-banner h2 {
+        color: var(--soft-white);
+        font-weight: 700;
+    }
+
+    .experience-banner p {
+        color: rgba(255, 255, 255, 0.7);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .btn-banner-gold {
+        background: var(--luxury-gold);
+        color: var(--primary-navy);
+        font-weight: 700;
+        padding: 14px 32px;
+        border-radius: 12px;
+        border: none;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-banner-gold:hover {
+        background: #f1c260;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(226, 176, 74, 0.3);
+        color: var(--primary-navy);
+    }
+
+    @media (max-width: 768px) {
+        .filter-btn-group {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 12px;
+            margin-bottom: 10px;
+            gap: 8px;
+            justify-content: flex-start !important;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .filter-btn-group::-webkit-scrollbar {
+            display: none;
+        }
+
+        .fleet-content {
+            padding: 20px;
+        }
+
+        .fleet-title {
+            font-size: 20px;
+        }
+    }
+</style>
+
+<!-- Header Start -->
+<div class="container-fluid bg-breadcrumb">
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Our Luxury Fleet</h4>
+        <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active">Our Fleet</li>
+        </ol>   
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Fleet Section Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+            <h1 class="display-5 text-capitalize mb-3" style="color: var(--primary-navy); font-weight: 700;">Select Elite Fleet</h1>
+            <p class="mb-0 text-muted">Explore our curated collection of immaculate, late-model corporate sedans, private SUVs, and high-occupancy executive sprinters configured to exceed standard luxury expectations.</p>
+        </div>
+
+        <!-- Filter Buttons Block -->
+        <div class="d-flex justify-content-center gap-2 filter-btn-group mb-5 wow fadeInUp" data-wow-delay="0.2s">
+            <button class="btn active" data-filter="all">All Vehicles</button>
+            <button class="btn" data-filter="sedan">Executive Sedans</button>
+            <button class="btn" data-filter="suv">Luxury SUVs</button>
+            <button class="btn" data-filter="sprinter">Chauffeur Vans</button>
+        </div>
+
+        <!-- Fleet Grid Matrix -->
+        <div class="row g-4 fleet-matrix-container">
+            
+            <!-- Vehicle 1: Sedan Class -->
+            <div class="col-md-6 col-lg-4 fleet-item wow fadeInUp" data-category="sedan" data-wow-delay="0.1s">
+                <div class="fleet-card">
+                    <div class="fleet-img-container">
+                        <span class="fleet-badge">First Class</span>
+                        <img src="{% static 'img/fleet-mercedes-s.jpg' %}" alt="Mercedes-Benz S-Class">
+                    </div>
+                    <div class="fleet-content">
+                        <h3 class="fleet-title">Mercedes-Benz S-Class</h3>
+                        <p class="fleet-subtitle">The global benchmark for executive road travel configuration.</p>
+                        
+                        <div class="fleet-specs-grid">
+                            <div class="spec-item"><i class="fa fa-user"></i> <span>3 Passengers</span></div>
+                            <div class="spec-item"><i class="fa fa-suitcase"></i> <span>3 Luggages</span></div>
+                            <div class="spec-item"><i class="fa fa-wifi"></i> <span>Free Wi-Fi</span></div>
+                            <div class="spec-item"><i class="fa fa-snowflake"></i> <span>Climate Zone</span></div>
+                        </div>
+
+                        <div class="fleet-actions">
+                            <a href="{% url 'make_reservation' %}" class="btn-fleet-primary">Book Luxury</a>
+                            <a href="#" class="btn-fleet-secondary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vehicle 2: SUV Class -->
+            <div class="col-md-6 col-lg-4 fleet-item wow fadeInUp" data-category="suv" data-wow-delay="0.3s">
+                <div class="fleet-card">
+                    <div class="fleet-img-container">
+                        <span class="fleet-badge">Prestige SUV</span>
+                        <img src="{% static 'img/fleet-cadillac-escalade.jpg' %}" alt="Cadillac Escalade ESV">
+                    </div>
+                    <div class="fleet-content">
+                        <h3 class="fleet-title">Cadillac Escalade ESV</h3>
+                        <p class="fleet-subtitle">Unmatched road presence, space, and premium command posture.</p>
+                        
+                        <div class="fleet-specs-grid">
+                            <div class="spec-item"><i class="fa fa-user"></i> <span>6 Passengers</span></div>
+                            <div class="spec-item"><i class="fa fa-suitcase"></i> <span>6 Luggages</span></div>
+                            <div class="spec-item"><i class="fa fa-beer"></i> <span>Refreshments</span></div>
+                            <div class="spec-item"><i class="fa fa-shield-alt"></i> <span>Elite Safety</span></div>
+                        </div>
+
+                        <div class="fleet-actions">
+                            <a href="{% url 'make_reservation' %}" class="btn-fleet-primary">Book Luxury</a>
+                            <a href="#" class="btn-fleet-secondary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vehicle 3: Sprinter/Van Class -->
+            <div class="col-md-6 col-lg-4 fleet-item wow fadeInUp" data-category="sprinter" data-wow-delay="0.5s">
+                <div class="fleet-card">
+                    <div class="fleet-img-container">
+                        <span class="fleet-badge">Group Travel</span>
+                        <img src="{% static 'img/fleet-sprinter.jpg' %}" alt="Mercedes-Benz Sprinter">
+                    </div>
+                    <div class="fleet-content">
+                        <h3 class="fleet-title">Mercedes Executive Sprinter</h3>
+                        <p class="fleet-subtitle">Tailored for corporate offsites, roadshows, and group events.</p>
+                        
+                        <div class="fleet-specs-grid">
+                            <div class="spec-item"><i class="fa fa-user"></i> <span>14 Passengers</span></div>
+                            <div class="spec-item"><i class="fa fa-suitcase"></i> <span>14 Luggages</span></div>
+                            <div class="spec-item"><i class="fa fa-plug"></i> <span>USB Outlets</span></div>
+                            <div class="spec-item"><i class="fa fa-tv"></i> <span>Media System</span></div>
+                        </div>
+
+                        <div class="fleet-actions">
+                            <a href="{% url 'make_reservation' %}" class="btn-fleet-primary">Book Luxury</a>
+                            <a href="#" class="btn-fleet-secondary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Banner Feature Block Start -->
+        <div class="experience-banner text-center p-5 mt-5 mx-0 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="py-4 position-relative z-index-2">
+                <h2 class="display-6 mb-3">Custom Fleet Requirements?</h2>
+                <p class="mb-4">Do you need tailored point-to-point staging, multi-vehicle event coordination, or special VIP protocols? Our operational dispatch coordinators are ready to support your custom request.</p>
+                <a href="{% url 'contact' %}" class="btn-banner-gold">Connect With Dispatch</a>
+            </div>
+        </div>
+        <!-- Banner Feature Block End -->
+    </div>
+</div>
+<!-- Fleet Section End -->
+
+<!-- Client Filter Scripts Matrix Link -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const filters = document.querySelectorAll(".filter-btn-group .btn");
+        const items = document.querySelectorAll(".fleet-item");
+
+        filters.forEach(filter => {
+            filter.addEventListener("click", function () {
+                // Manage Active Highlight Class
+                filters.forEach(btn => btn.classList.remove("active"));
+                this.classList.add("active");
+
+                const targetFilter = this.getAttribute("data-filter");
+
+                items.forEach(item => {
+                    const category = item.getAttribute("data-category");
+                    if (targetFilter === "all" || category === targetFilter) {
+                        item.style.display = "block";
+                        // Re-trigger visual entry animations subtly
+                        item.classList.add("fadeIn");
+                    } else {
+                        item.style.display = "none";
+                        item.classList.remove("fadeIn");
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

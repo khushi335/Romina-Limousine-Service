@@ -1,0 +1,397 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    :root {
+        --primary-navy: #0f172a; 
+        --luxury-gold: #e2b04a; 
+        --soft-white: #ffffff;
+        --bg-glass: rgba(255, 255, 255, 0.95);
+        --input-border: #e2e8f0;
+    }
+
+    .reservation-page {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 80px 0;
+        font-family: 'Inter', 'Poppins', sans-serif;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .reservation-card {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        background: var(--soft-white);
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* LEFT SIDE: LUXURY INFO PANEL */
+    .info-panel {
+        background: var(--primary-navy);
+        color: #fff;
+        padding: 60px 45px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .info-panel::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .info-panel h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--luxury-gold);
+        margin-bottom: 20px;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        position: relative;
+        z-index: 1;
+    }
+
+    .info-panel .subtitle {
+        font-size: 16px;
+        margin-bottom: 40px;
+        line-height: 1.6;
+        color: #94a3b8;
+        position: relative;
+        z-index: 1;
+    }
+
+    .info-box { 
+        margin-bottom: 30px; 
+        position: relative; 
+        z-index: 1; 
+        display: flex;
+        gap: 15px;
+    }
+    
+    .info-box i {
+        color: var(--luxury-gold);
+        font-size: 20px;
+        margin-top: 5px;
+    }
+
+    .info-box h3 { color: #f8fafc; font-size: 18px; margin-bottom: 6px; font-weight: 600; }
+    .info-box p { font-size: 14px; color: #94a3b8; line-height: 1.5; margin: 0; }
+
+    .steps-container {
+        margin-top: 20px;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        position: relative;
+        z-index: 1;
+    }
+
+    .step-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .step-badge {
+        background: var(--luxury-gold);
+        color: var(--primary-navy);
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+
+    .step-text strong { color: #fff; display: block; margin-bottom: 2px; }
+    .step-text span { font-size: 13px; color: #94a3b8; }
+
+    /* RIGHT SIDE: FORM PANEL */
+    .form-panel { padding: 60px; background: var(--bg-glass); }
+    .form-header { margin-bottom: 40px; }
+    .form-header h2 { font-size: 28px; color: var(--primary-navy); font-weight: 700; margin-bottom: 5px; }
+    .form-header p { color: #64748b; font-size: 14px; }
+
+    .grid-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px; }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group label { font-weight: 600; font-size: 13px; margin-bottom: 8px; color: #334155; text-transform: uppercase; letter-spacing: 0.05em; }
+    
+    .input-field {
+        padding: 14px 16px;
+        border: 1px solid var(--input-border);
+        border-radius: 12px;
+        font-size: 15px;
+        background: #fcfcfd;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* STYLE FOR DATE CALENDAR ICON */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        background-color: transparent;
+        cursor: pointer;
+        filter: opacity(0.6);
+    }
+
+    .input-field:focus {
+        border-color: var(--luxury-gold);
+        background: #fff;
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(226, 176, 74, 0.1);
+    }
+
+    .time-container { display: flex; gap: 10px; }
+    .time-container select { 
+        flex: 1; 
+        padding: 12px; 
+        border: 1px solid var(--input-border); 
+        border-radius: 10px;
+        cursor: pointer;
+        background: #fcfcfd;
+    }
+
+    .btn-submit {
+        background: var(--primary-navy);
+        color: #fff;
+        border: none;
+        padding: 18px;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 12px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 30px;
+        transition: all 0.3s;
+        box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.3);
+    }
+    
+    .btn-submit:hover {
+        background: #1e293b;
+        transform: translateY(-2px);
+        box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.4);
+    }
+
+    .contact-footer {
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 25px;
+        border-top: 1px solid #f1f5f9;
+        font-size: 15px;
+        color: #475569;
+    }
+    
+    .contact-footer a {
+        color: var(--primary-navy);
+        font-weight: 800;
+        text-decoration: none;
+        border-bottom: 2px solid var(--luxury-gold);
+    }
+
+    .airport-pill-container {
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        z-index: 1;
+        position: relative;
+    }
+
+    .airport-pill {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: rgba(255,255,255,0.08);
+        padding: 6px 12px;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.15);
+        color: #e2e8f0;
+    }
+
+    @media (max-width: 992px) {
+        .reservation-card { grid-template-columns: 1fr; }
+        .info-panel { padding: 40px; }
+        .form-panel { padding: 40px 20px; }
+        .grid-row { grid-template-columns: 1fr; gap: 15px; }
+    }
+</style>
+
+<div class="reservation-page">
+    <div class="container">
+        <div class="reservation-card">
+            
+            <div class="info-panel">
+                <h1>Romina <br> Limousine Service</h1>
+                <p class="subtitle">Secure, reliable luxury private transportation customized for executive travel, airport transfers, and elite special events.</p>
+
+                <div class="info-box">
+                    <i class="fa-solid fa-car-rear"></i>
+                    <div>
+                        <h3>Elite Chauffeurs</h3>
+                        <p>Experience pristine travel in our fleet of professional, late-model sedans, SUVs, and luxury multi-passenger vehicles.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <div>
+                        <h3>Priority Booking</h3>
+                        <p>Receive immediate, seamless confirmation for your dynamic corporate travel arrangements or hourly charters.</p>
+                    </div>
+                </div>
+
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-badge">1</div>
+                        <div class="step-text">
+                            <strong>Airport Pickups</strong>
+                            <span>Please include your Flight Number and Airline in Special Notes.</span>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-badge">2</div>
+                        <div class="step-text">
+                            <strong>Hourly & Events</strong>
+                            <span>Specify "Hourly Charter" along with your intended duration in Special Notes.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="airport-pill-container">
+                    <span class="airport-pill">Airport Transfers</span>
+                    <span class="airport-pill">Corporate Travel</span>
+                    <span class="airport-pill">VIP Chauffeur</span>
+                    <span class="airport-pill">Hourly Charters</span>
+                    <span class="airport-pill">Special Events</span>
+                </div>
+            </div>
+
+            <div class="form-panel">
+                <div class="form-header">
+                    <h2>Complete Reservation</h2>
+                    <p>Enter your travel details below for a premium experience.</p>
+                </div>
+
+                <form action="{% url 'make_reservation' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="grid-row">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-user"></i> Name *</label>
+                            <input type="text" name="name" class="input-field" placeholder="Your Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-calendar-days"></i> Date *</label>
+                            <input type="date" name="date" id="reservation_date" class="input-field" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label><i class="fa-solid fa-clock"></i> Pickup Time *</label>
+                        <div class="time-container">
+                            <select name="hh" class="input-field" required>
+                                <option value="" disabled selected>Hour</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            <select name="mm" class="input-field" required>
+                                <option value="" disabled selected>Min</option>
+                                <option value="00">00</option>
+                                <option value="05">05</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                                <option value="45">45</option>
+                                <option value="50">50</option>
+                                <option value="55">55</option>
+                            </select>
+                            <select name="ampm" class="input-field" required>
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid-row">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-location-dot"></i> Pickup Address *</label>
+                            <input type="text" name="from" class="input-field" placeholder="Street, City, Zip" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-plane-arrival"></i> Destination *</label>
+                            <input type="text" name="to" class="input-field" placeholder="Airport or Hotel" required>
+                        </div>
+                    </div>
+
+                    <div class="grid-row">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-envelope"></i> Email Address *</label>
+                            <input type="email" name="email" class="input-field" placeholder="email@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-phone"></i> Mobile Phone *</label>
+                            <input type="tel" name="mobile" class="input-field" placeholder="(000) 000-0000" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label><i class="fa-solid fa-building"></i> Company (Optional)</label>
+                        <input type="text" name="company" class="input-field" placeholder="Account Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-pen-to-square"></i> Special Notes</label>
+                        <textarea name="notes" class="input-field" rows="3" placeholder="Flight #, Hourly Duration, or Special Requests..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Confirm Reservation</button>
+
+                    <div class="contact-footer">
+                        Questions? <i class="fa-solid fa-message"></i> Call or Text: <a href="tel:240-351-0826">240-351-0826</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Set today as the minimum date to disable previous dates
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    
+    // Formatting to YYYY-MM-DD for the 'min' attribute
+    const formattedToday = yyyy + '-' + mm + '-' + dd;
+    document.getElementById('reservation_date').setAttribute('min', formattedToday);
+</script>
+
+{% endblock %}

@@ -1,0 +1,320 @@
+/* Premium Luminous Corporate Color Scheme */
+:root {
+    --color-bg-base: #141c2b;
+    --color-surface-card: #1c273d;
+    --color-surface-hover: #24324e;
+    --color-gold: #c5a059;
+    --color-gold-glow: rgba(197, 160, 89, 0.15);
+    
+    --color-text-pure: #ffffff;
+    --color-text-silver: #e2e8f0;
+    --color-text-dim: #94a3b8;
+    --color-border-line: #2d3b54;
+}
+
+/* Absolute Edge-To-Edge Container Reset */
+.luxury-viewport-wrapper {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    color: var(--color-text-silver);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* High-End Hero Header Section with Image Background */
+.showcase-hero {
+    position: relative;
+    width: 100%;
+    min-height: 550px;
+    padding: 160px 8% 120px 8%;
+    /* Replace url target with your preferred high-res vehicle image asset path if needed */
+    background-image: url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1920&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center 35%;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Dark Rich Gradient Overlay to ensure crisp contrast readability */
+.hero-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(20, 28, 43, 0.95) 30%, rgba(20, 28, 43, 0.6) 100%),
+                linear-gradient(to top, rgba(20, 28, 43, 1) 0%, rgba(20, 28, 43, 0) 50%);
+    z-index: 1;
+}
+
+.hero-frame-content {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    z-index: 2;
+}
+
+.eyebrow-accent-badge {
+    display: inline-block;
+    color: var(--color-gold);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border: 1px solid var(--color-gold);
+    padding: 6px 14px;
+    background-color: var(--color-gold-glow);
+    margin-bottom: 24px;
+    border-radius: 2px;
+}
+
+.premium-main-title {
+    color: var(--color-text-pure);
+    font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin: 0 0 20px 0;
+}
+
+.premium-lead-text {
+    color: var(--color-text-silver);
+    font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+    line-height: 1.6;
+    max-width: 750px;
+    margin: 0 0 40px 0;
+}
+
+/* Hero Button Cluster Setup */
+.hero-action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-gold-luxury {
+    background-color: var(--color-gold);
+    color: #141c2b;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 16px 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-gold-luxury:hover {
+    background-color: #dfba71;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(197, 160, 89, 0.3);
+}
+
+.btn-translucent {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background-color: rgba(255, 255, 255, 0.06);
+    color: var(--color-text-pure);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 15px 34px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+}
+
+.btn-translucent:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--color-text-pure);
+}
+
+.phone-svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-gold);
+}
+
+/* Completely Seamless Multi-Column Grid System (No Outside Margins) */
+.premium-directory-section {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.fluid-edge-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+}
+
+.fluid-region-column {
+    background-color: var(--color-surface-card);
+    border-right: 1px solid var(--color-border-line);
+    padding: 70px 6%;
+    box-sizing: border-box;
+}
+
+.fluid-region-column:last-child {
+    border-right: none;
+}
+
+/* Clean Column Sticky Headers */
+.region-sticky-header {
+    margin-bottom: 45px;
+}
+
+.region-meta-info {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.region-index {
+    font-family: monospace;
+    font-size: 1.1rem;
+    color: var(--color-gold);
+    font-weight: bold;
+}
+
+.fluid-region-column h2 {
+    color: var(--color-text-pure);
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.region-accent-line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-border-line);
+}
+
+/* Premium Dynamic Interactive Location Grid Row Blocks */
+.luxury-location-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.luxury-location-list li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover Accent Blocks */
+.list-item-hover-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-surface-hover);
+    border-left: 3px solid var(--color-gold);
+    opacity: 0;
+    transform: scaleX(0.96);
+    transform-origin: left;
+    transition: all 0.25s ease;
+    z-index: 1;
+    border-radius: 0 4px 4px 0;
+}
+
+.luxury-location-list li:hover .list-item-hover-box {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.bullet-indicator {
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-border-line);
+    border-radius: 50%;
+    z-index: 2;
+    transition: all 0.25s ease;
+}
+
+.luxury-location-list li:hover .bullet-indicator {
+    background-color: var(--color-gold);
+    box-shadow: 0 0 8px var(--color-gold);
+}
+
+.location-name-text {
+    color: var(--color-text-silver);
+    font-size: 1.1rem;
+    font-weight: 400;
+    z-index: 2;
+    transition: all 0.2s ease;
+}
+
+.luxury-location-list li:hover .location-name-text {
+    color: var(--color-text-pure);
+    transform: translateX(4px);
+}
+
+/* Robust Viewport Breakpoint Adjustments */
+@media (max-width: 1200px) {
+    .fluid-edge-row {
+        grid-template-columns: 1fr; /* Changes gracefully to stacked rows but remains 100% full width */
+    }
+    
+    .fluid-region-column {
+        border-right: none;
+        border-bottom: 1px solid var(--color-border-line);
+        padding: 60px 8%;
+    }
+    
+    .fluid-region-column:last-child {
+        border-bottom: none;
+    }
+    
+    .luxury-location-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Forms an organized 2-column layout block on tablet screens */
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .showcase-hero {
+        padding: 120px 6% 80px 6%;
+        min-height: auto;
+    }
+    
+    .fluid-region-column {
+        padding: 50px 6%;
+    }
+    
+    .hero-action-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .btn-gold-luxury, .btn-translucent {
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .luxury-location-list {
+        grid-template-columns: 1fr; /* Drops back down cleanly to single rows on tight mobile phones */
+    }
+}

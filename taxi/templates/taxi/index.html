@@ -1,0 +1,748 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Romina Limousine Service{% endblock %}
+
+{% block content %}
+
+
+<section class="hero-premium-section" aria-label="Romina Limousine Service - Premium Chauffeur & Airport Transportation">
+    <!-- Carousel Background Canvas (Edge to Edge) -->
+    <div class="hero-carousel" aria-hidden="true">
+        <!-- Slide 1 -->
+        <div class="carousel-slide">
+            <img src="{% static 'img/events.jpg' %}" alt="Romina Limousine luxury sedan airport car service" class="hero-bg-img">
+        </div>
+        <!-- Slide 2 -->
+        <div class="carousel-slide">
+            <img src="{% static 'img/hourly.jpg' %}" alt="Romina Limousine premium SUV corporate transportation" class="hero-bg-img">
+        </div>
+        <!-- Slide 3 -->
+        <div class="carousel-slide">
+            <img src="{% static 'img/service.jpg' %}" alt="Romina Limousine executive luxury sprinter van rental" class="hero-bg-img">
+        </div>
+    </div>
+
+    <!-- Vignette Shielding for Complete Readability -->
+    <div class="hero-dark-overlay"></div>
+
+    <!-- Foreground Content Layer -->
+    <div class="hero-inner-content">
+        <header class="hero-text-wrapper">
+            <p class="hero-location-tag">Maryland • Virginia • Washington DC • Baltimore</p>
+            <h1 class="hero-main-title">
+                Romina Limousine <span class="gold-gradient-text">Service</span>
+            </h1>
+            <div class="hero-description-card">
+                <p class="white-text">
+                    Experience the pinnacle of private travel with <strong>Romina Limousine Service</strong>. We feature an elite, late-model private fleet of luxury sedans, premium SUVs, and executive Sprinter Vans paired with an absolute punctuality guarantee. Enjoy sophisticated, professional chauffeur accommodations across MD, VA, and Washington DC with seamless airport transfers to BWI, Dulles (IAD), and Reagan National (DCA).
+                </p>
+            </div>
+        </header>
+        
+        <!-- Call to Action Anchors -->
+        <div class="hero-btn-group">
+            <a href="{% url 'make_reservation' %}" class="btn-gold" aria-label="Book your Romina Limousine ride online">BOOK ONLINE</a>
+            <a href="tel:2403510826" class="btn-outline" aria-label="Call Romina Limousine Service Concierge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; vertical-align: middle;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                CALL CONCIERGE
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="bwi-about-section" aria-label="About Romina Limousine Service at BWI">
+    <div class="bwi-about-container">
+        
+        <header class="bwi-about-header">
+            <h2 class="bwi-main-title">Welcome to Romina Limousine Service</h2>
+            <div class="gold-divider"></div>
+            <p class="bwi-main-subtitle">Book a Spacious Sedan, Luxury SUV, or Executive Sprinter Van</p>
+        </header>
+
+        <div class="bwi-flex-layout">
+            <!-- Left Side: Visual Stats Panel -->
+            <div class="bwi-stats-side">
+                <div class="stats-overlay"></div>
+                <div class="stat-content-wrapper">
+                    <div class="stat-item">
+                        <span class="stat-number">2006</span>
+                        <span class="stat-label">Established</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15 Min</span>
+                        <span class="stat-label">Rapid Pickup</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Availability</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Editorial Content -->
+            <article class="bwi-about-content">
+                <p class="drop-cap-p">
+                    Looking for a seamless, upscale transfer to or from Baltimore/Washington International? <strong>Romina Limousine Service</strong> is the premier choice for luxury BWI airport car service, proudly serving Baltimore, Maryland, and the surrounding metropolitan regions. With our highly synchronized fleet staging, a professional chauffeur can be curbside at BWI within 15 minutes of your request—ensuring elite travel accommodations no matter what time your flight touches down.
+                </p>
+
+                <p>
+                    Avoid the uncertainty and long lines of rideshares or standard taxi queues. Trust our meticulously maintained black car solutions to transition you from the terminal to your destination safely, privately, and strictly on schedule. Pre-booking your private vehicle secures a dedicated premium chauffeur trained to monitor your flight status in real time for effortless, guaranteed arrivals.
+                </p>
+
+                <p>
+                    Whether you require a discreet executive sedan, an expansive SUV for corporate luggage, or a customized group transit option, we deliver uncompromised reliability. Romina Limousine Service provides top-tier BWI airport shuttle alternatives, elegant black car configurations, and long-distance chauffeur provisions to destinations including <strong>Easton, Frederick, Arlington, and York</strong>. Reserve your luxury car service from BWI or Dulles (IAD) online today and experience the difference.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+
+<section class="benefits-section" aria-label="Romina Limousine Service Advantages">
+    <div class="benefits-container">
+        <header class="benefits-header">
+            <h2 class="benefits-main-title">Book Your Luxury Airport Car Service Now</h2>
+            <div class="gold-accent-line"></div>
+        </header>
+
+        <div class="benefits-grid">
+            <!-- Benefit 1 -->
+            <article class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <div class="benefit-icon"><i class="fa-solid fa-user-tie"></i></div>
+                </div>
+                <h3>Professional Chauffeurs</h3>
+                <p>Our elite drivers are reliable hospitality partners, rigorously vetted and familiar with optimal MD, VA, and DC routes.</p>
+                <ul class="benefit-list">
+                    <li>Comprehensive background checks</li>
+                    <li>Advanced professional training</li>
+                    <li>Local route and traffic expertise</li>
+                    <li>Uncompromising customer service</li>
+                </ul>
+            </article>
+
+            <!-- Benefit 2 -->
+            <article class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <div class="benefit-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                </div>
+                <h3>Fixed Rate Pricing</h3>
+                <p>Enjoy fully transparent pricing with zero surprises. What you are quoted is exactly what you pay—guaranteed.</p>
+                <ul class="benefit-list">
+                    <li>Absolute zero surge pricing</li>
+                    <li>No hidden fees or fuel surcharges</li>
+                    <li>All-inclusive corporate rates</li>
+                    <li>Streamlined monthly billing options</li>
+                </ul>
+            </article>
+
+            <!-- Benefit 3 -->
+            <article class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <div class="benefit-icon"><i class="fa-solid fa-plane-arrival"></i></div>
+                </div>
+                <h3>Flight Tracking</h3>
+                <p>We monitor your flight matrix in real-time and adjust gate pickup windows automatically. No charges for delays.</p>
+                <ul class="benefit-list">
+                    <li>Real-time commercial flight monitoring</li>
+                    <li>Automatic gate adjustment updates</li>
+                    <li>No penalty charges for delayed arrivals</li>
+                    <li>Complete travel peace of mind</li>
+                </ul>
+            </article>
+
+            <!-- Benefit 4 -->
+            <article class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <div class="benefit-icon"><i class="fa-solid fa-car-rear"></i></div>
+                </div>
+                <h3>Luxury Fleet</h3>
+                <p>Late-model luxury vehicles maintained to flawless aesthetic standards and detailed comprehensively before every dispatch.</p>
+                <ul class="benefit-list">
+                    <li>Immaculate late-model vehicle selection</li>
+                    <li>Rigorous safety maintenance schedules</li>
+                    <li>Sanitized and professionally detailed daily</li>
+                    <li>Premium sedans, SUVs, &amp; Sprinters</li>
+                </ul>
+            </article>
+
+            <!-- Benefit 5 -->
+            <article class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <div class="benefit-icon"><i class="fa-solid fa-headset"></i></div>
+                </div>
+                <h3>24/7 Service</h3>
+                <p>Round-the-clock live availability for early morning flights, late connections, and sudden itinerary revisions.</p>
+                <ul class="benefit-list">
+                    <li>Live operators active 24/7/365</li>
+                    <li>Efficient last-minute booking management</li>
+                    <li>Dedicated concierge dispatch team</li>
+                    <li>Reliable emergency fallback support</li>
+                </ul>
+            </article>
+
+            <!-- Benefit 6 -->
+            <article class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <div class="benefit-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                </div>
+                <h3>On-Time Guarantee</h3>
+                <p>Experience precise coordination. Your dedicated chauffeur arrives staged and ready ahead of schedule every single time.</p>
+                <ul class="benefit-list">
+                    <li>Punctual curbside terminal meet-up</li>
+                    <li>Complimentary luggage handling assistance</li>
+                    <li>Optimized routing for BWI arrivals</li>
+                    <li>Staged early morning residential pickups</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="airport-services-wide" aria-label="Romina Limousine Airport and Charter Services">
+    <div class="services-full-wrapper">
+        <header class="services-header">
+            <h2 class="services-title">Airport Transportation Services We Provide</h2>
+            <div class="gold-accent-line"></div>
+            <p class="services-subtitle">Serving all major Maryland, Virginia, and Washington DC airports with professional chauffeurs and luxury vehicles.</p>
+        </header>
+
+        <div class="services-grid-3">
+            <!-- Box 1 (Featured) -->
+            <article class="service-box featured">
+                <div class="service-box-glow"></div>
+                <div class="service-icon"><i class="fa-solid fa-plane-up"></i></div>
+                <h3>BWI Airport Car Service</h3>
+                <p>Reliable, door-to-door luxury transportation to and from Baltimore/Washington International (BWI) with real-time gate staging.</p>
+            </article>
+
+            <!-- Box 2 -->
+            <article class="service-box">
+                <div class="service-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                <h3>Washington Dulles (IAD)</h3>
+                <p>Premium car service to and from Washington Dulles International Airport for seamless international and domestic global travel.</p>
+            </article>
+
+            <!-- Box 3 -->
+            <article class="service-box">
+                <div class="service-icon"><i class="fa-solid fa-landmark-dome"></i></div>
+                <h3>Reagan National (DCA)</h3>
+                <p>Private car service for executive and leisure travel, ensuring meticulous, timely terminal drop-offs at Reagan National.</p>
+            </article>
+
+            <!-- Box 4 -->
+            <article class="service-box">
+                <div class="service-icon"><i class="fa-solid fa-clock"></i></div>
+                <h3>Hourly Charter Service</h3>
+                <p>Flexible as-directed hourly booking for corporate meetings, roadshows, or events with a dedicated personal chauffeur.</p>
+            </article>
+
+            <!-- Box 5 -->
+            <article class="service-box">
+                <div class="service-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <h3>Corporate Executive Travel</h3>
+                <p>Sophisticated corporate black car solutions designed for business professionals, executives, and high-frequency accounts.</p>
+            </article>
+
+            <!-- Box 6 -->
+            <article class="service-box">
+                <div class="service-icon"><i class="fa-solid fa-bus-simple"></i></div>
+                <h3>Luxury Group Fleet</h3>
+                <p>High-capacity Mercedes Sprinter vans and premium SUVs tailored for executive group airport transfers and events.</p>
+            </article>
+        </div>
+
+        <footer class="services-footer">
+            <p><i class="fa-solid fa-shield-halved"></i> 24/7 Premium availability for all Maryland, DC, and Virginia private transportation frameworks.</p>
+        </footer>
+    </div>
+</section>
+
+<section class="premium-serve-section" aria-label="Romina Limousine Service Geographic Coverage">
+    <div class="premium-container">
+        
+        <header class="premium-header">
+            <span class="top-label">Luxury Coverage</span>
+            <h2 class="premium-title">Areas We Serve</h2>
+            <p class="premium-subtitle">Our dedicated professional chauffeur network will safely and conveniently drive you to your destination anywhere in Maryland, Virginia, Washington DC, and beyond.</p>
+            <div class="premium-divider"><span></span></div>
+        </header>
+
+        <div class="location-flex-wrapper">
+            <!-- Card 1: Maryland -->
+            <div class="serve-card">
+                <div class="card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <h3>Maryland Cities</h3>
+                <div class="pills-container">
+                    <span>Baltimore</span><span>Annapolis</span><span>Columbia</span>
+                    <span>Frederick</span><span>Rockville</span><span>Gaithersburg</span>
+                    <span>Bethesda</span><span>Silver Spring</span><span>Towson</span>
+                    <span>Bowie</span><span>Ellicott City</span><span>Easton</span>
+                    <span>Hagerstown</span><span>Ocean City</span><span>Salisbury</span>
+                    <span>Laurel</span><span>Greenbelt</span><span>College Park</span>
+                </div>
+            </div>
+
+            <!-- Card 2: Washington DC -->
+            <div class="serve-card">
+                <div class="card-icon"><i class="fa-solid fa-landmark"></i></div>
+                <h3>Washington DC</h3>
+                <div class="pills-container">
+                    <span>Downtown DC</span><span>Capitol Hill</span><span>Georgetown</span>
+                    <span>Dupont Circle</span><span>Foggy Bottom</span><span>Adams Morgan</span>
+                    <span>Navy Yard</span><span>NoMa</span>
+                </div>
+            </div>
+
+            <!-- Card 3: Northern Virginia -->
+            <div class="serve-card">
+                <div class="card-icon"><i class="fa-solid fa-tree-city"></i></div>
+                <h3>Northern Virginia</h3>
+                <div class="pills-container">
+                    <span>Arlington</span><span>Alexandria</span><span>McLean</span>
+                    <span>Tysons Corner</span><span>Reston</span><span>Herndon</span>
+                    <span>Fairfax</span><span>Springfield</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FBO Private Aviation Luxury Banner -->
+        <div class="aviation-premium-banner">
+            <div class="aviation-inner">
+                <div class="aviation-text">
+                    <h4>Private Aviation Terminals (FBO)</h4>
+                    <p class="text-white">Seamless ramp-side tarmac coordination and black car chauffeured transfers directly to executive airfields.</p>
+                </div>
+                <div class="aviation-tags">
+                    <div class="tag-item"><i class="fa-solid fa-plane-up"></i> Signature Flight Support</div>
+                    <div class="tag-item"><i class="fa-solid fa-plane-up"></i> Atlantic Aviation</div>
+                    <div class="tag-item"><i class="fa-solid fa-plane-up"></i> Private Hangars / Charters</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="fleet-section" aria-label="Romina Limousine Fleet Showcase">
+    <header class="fleet-header">
+        <span class="fleet-top-label">The Fleet Standard</span>
+        <h2 class="fleet-main-title">Our Premium Cadillac Fleet</h2>
+        <p class="fleet-intro">
+            As an elite corporate and airport transportation provider, Romina Limousine sets the benchmark for executive travel. Our meticulously detailed fleet is anchored by luxury Cadillac vehicles, promising unmatched comfort, privacy, and technical refinement for your journey.
+        </p>
+        <div class="fleet-divider"><span></span></div>
+    </header>
+
+    <div class="fleet-full-container">
+        <div class="single-fleet-wrapper">
+            <article class="vehicle-card hero-vehicle">
+                <!-- Image Wrapper Column -->
+                <div class="vehicle-image-wrapper">
+                    <img src="{% static 'img/cadillac.jpg' %}" alt="Romina Limousine Premium Cadillac Fleet">
+                    <div class="vehicle-overlay-tag">Executive Class</div>
+                </div>
+                
+                <!-- Content Column -->
+                <div class="vehicle-info">
+                    <h3>Cadillac Luxury Series</h3>
+                    <span class="vehicle-sub-tag">The Pinnacle of Chauffeur Driven Comfort</span>
+                    
+                    <div class="specs-box">
+                        <div class="spec-item"><i class="fa-solid fa-users"></i> 1-4 Passengers</div>
+                        <div class="spec-item"><i class="fa-solid fa-suitcase-rolling"></i> 3-4 Large Bags</div>
+                        <div class="spec-item"><i class="fa-solid fa-wifi"></i> Onboard Wi-Fi</div>
+                    </div>
+                    
+                    <p class="perfect-for">
+                        <strong>Perfect for:</strong> Executive airport transfers, seamless corporate travel, diplomatic missions, and discreet premium transportation across Maryland, Virginia, and Washington DC.
+                    </p>
+                    
+                    <div class="luxury-card-footer">
+                        <span class="amenity-pill"><i class="fa-solid fa-snowflake"></i> Climate Controlled</span>
+                        <span class="amenity-pill"><i class="fa-solid fa-bottle-water"></i> Complimentary Water</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+
+<section class="services-matrix-section" aria-label="Romina Limousine Service Matrix">
+    <div class="matrix-container">
+        
+        <header class="matrix-header">
+            <span class="matrix-top-label">Premium Solutions</span>
+            <h2 class="matrix-title">Luxury Airport Transfers & Chauffeur Services</h2>
+            <p class="matrix-subtitle">Meticulous private ground transportation serving BWI, Dulles (IAD), and Reagan National (DCA). We guarantee immaculate scheduling with executive chauffeurs.</p>
+            <div class="matrix-divider"><span></span></div>
+        </header>
+
+        <div class="matrix-grid">
+            <!-- Box 1 -->
+            <article class="service-box">
+                <div class="box-icon"><i class="fa-solid fa-city"></i></div>
+                <h3>BWI to Washington DC</h3>
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Luxury chauffeured sedans</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Private door-to-door transit</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Fixed executive flat rates</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Meet & greet baggage services</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Guaranteed timely dispatch</li>
+                </ul>
+            </article>
+
+            <!-- Box 2 -->
+            <article class="service-box">
+                <div class="box-icon"><i class="fa-solid fa-shuttle-van"></i></div>
+                <h3>BWI Airport to Baltimore</h3>
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Elite black car fleet solutions</li>
+                    <li><i class="fa-solid fa-circle-check"></i> On-demand private routing</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Corporate accounts management</li>
+                    <li><i class="fa-solid fa-circle-check"></i> FBO private hangar logistics</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Dedicated executive styling</li>
+                </ul>
+            </article>
+
+            <!-- Box 3 -->
+            <article class="service-box">
+                <div class="box-icon"><i class="fa-solid fa-anchor"></i></div>
+                <h3>BWI Airport to Annapolis</h3>
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Elite presidential sedans</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Luxury SUVs & Sprinter vans</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Maritime corporate transport</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Leisure charter itineraries</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Strict point-to-point schedule</li>
+                </ul>
+            </article>
+
+            <!-- Box 4 -->
+            <article class="service-box">
+                <div class="box-icon"><i class="fa-solid fa-star"></i></div>
+                <h3>Premium Airport Car Service</h3>
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Servicing tri-state allocations</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Background-verified chauffeurs</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Live cellular flight tracking</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Integrated child safety seats</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Premium Cadillac options</li>
+                </ul>
+            </article>
+
+            <!-- Box 5 -->
+            <article class="service-box">
+                <div class="box-icon"><i class="fa-solid fa-car-side"></i></div>
+                <h3>Luxury Charter Services</h3>
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Dedicated hourly block booking</li>
+                    <li><i class="fa-solid fa-circle-check"></i> High-profile VIP provisions</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Executive multi-stop options</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Special event coordination</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Custom high-end requests</li>
+                </ul>
+            </article>
+
+            <!-- Box 6 -->
+            <article class="service-box">
+                <div class="box-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <h3>Corporate Executive Travel</h3>
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Automated business billing portals</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Priority corporate scheduling</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Immediate booking flexibility</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Premium black SUV configurations</li>
+                    <li><i class="fa-solid fa-circle-check"></i> GSA compliant transport options</li>
+                </ul>
+            </article>
+
+            <!-- Box 7 -->
+            <article class="service-box">
+                <div class="box-icon"><i class="fa-solid fa-clock"></i></div>
+                <h3>Elite Reliability Standard</h3>
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-circle-check"></i> 24/7/365 Continuous dispatch</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Complimentary terminal wait limits</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Dynamic red-eye scheduling</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Digital travel notifications</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Experienced local drivers</li>
+                </ul>
+            </article>
+
+            <!-- Box 8 -->
+            <article class="service-box">
+                <div class="box-icon"><i class="fa-solid fa-users-gear"></i></div>
+                <h3>SUV & Executive Vans</h3>
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-circle-check"></i> High-capacity team logistics</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Extended rear cargo configurations</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Family holiday transport focus</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Mercedes Sprinter variants</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Elite grouping arrangements</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Features Bar Section -->
+        <div class="features-bar">
+            <h3 class="features-bar-title">Premium Chauffeur Amenities Included</h3>
+            <div class="features-scroll-wrapper">
+                <div class="features-scroll">
+                    <div class="feat-item"><i class="fa-solid fa-baby"></i> Child Seats</div>
+                    <div class="feat-item"><i class="fa-solid fa-wifi"></i> Free Wi-Fi</div>
+                    <div class="feat-item"><i class="fa-solid fa-bottle-water"></i> Bottled Water</div>
+                    <div class="feat-item"><i class="fa-solid fa-plug"></i> USB Ports</div>
+                    <div class="feat-item"><i class="fa-solid fa-language"></i> Bilingual drivers</div>
+                    <div class="feat-item"><i class="fa-solid fa-headset"></i> 24/7 Support</div>
+                    <div class="feat-item"><i class="fa-solid fa-credit-card"></i> Corporate Pay</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer class="routes-cta" aria-label="Custom Route Support">
+    <div class="cta-content">
+        
+        <div class="cta-text-block">
+            <span class="cta-badge"><span class="pulse-dot"></span> On-Demand Logistics</span>
+            <h3>Need a custom route?</h3>
+            <p>Our dispatch team is available 24/7/365 to handle custom routing or provide immediate pricing over the phone.</p>
+        </div>
+
+        <div class="cta-action-block">
+            <a href="tel:2403510826" class="phone-cta-button" aria-label="Call Romina Limousine Service at 240-351-0826">
+                <div class="btn-icon-wrapper">
+                    <i class="fa-solid fa-phone-volume"></i>
+                </div>
+                <div class="btn-text-wrapper">
+                    <span class="btn-label">Call 24/7 Dispatch</span>
+                    <span class="btn-number">240-351-0826</span>
+                </div>
+                <i class="fa-solid fa-chevron-right btn-arrow"></i>
+            </a>
+        </div>
+
+    </div>
+</footer>
+        
+<section class="service-matrix-section" aria-labelledby="matrix-heading">
+    <div class="matrix-container">
+        
+        <header class="matrix-header">
+            <span class="matrix-badge">Regional Coverage</span>
+            <h2 id="matrix-heading" class="matrix-title">Premium Car & Limo Services Across MD, VA & DC</h2>
+            <p class="matrix-subtitle">Explore our luxury transportation services in neighboring cities and airports.</p>
+            <div class="matrix-accent"></div>
+        </header>
+
+        <div class="matrix-grid">
+            
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>Bethesda Transportation</h4>
+                    <p>Luxury limo & car service</p>
+                    <a href="#" class="matrix-link" aria-label="Book Bethesda Limo Service">Bethesda Limo Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>Columbia Transportation</h4>
+                    <p>Premium car service</p>
+                    <a href="#" class="matrix-link" aria-label="Book Columbia Limo Service">Columbia Limo Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>Rockville Transportation</h4>
+                    <p>Executive car service</p>
+                    <a href="#" class="matrix-link" aria-label="Book Rockville Car Service">Rockville Car Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>Annapolis Transportation</h4>
+                    <p>Airport transfers</p>
+                    <a href="#" class="matrix-link" aria-label="Book Annapolis Airport Car Service">Annapolis Airport Car Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <!-- Highlight Card: Designed to pop subtly in the layout -->
+            <div class="matrix-item">
+                <div class="matrix-card highlight-card">
+                    <span class="card-badge">Popular</span>
+                    <h4>BWI Airport Service</h4>
+                    <p>Limo & Black Car</p>
+                    <a href="#" class="matrix-link" aria-label="Book BWI Limo Service">BWI Limo Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>Arlington to BWI</h4>
+                    <p>Arlington VA transfers</p>
+                    <a href="#" class="matrix-link" aria-label="Book BWI Arlington Car Service">BWI Arlington Car Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>Baltimore to BWI</h4>
+                    <p>Downtown to BWI Airport</p>
+                    <a href="#" class="matrix-link" aria-label="Book BWI Baltimore Car Service">BWI Baltimore Car Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <!-- Highlight Card -->
+            <div class="matrix-item">
+                <div class="matrix-card highlight-card">
+                    <span class="card-badge">Popular</span>
+                    <h4>Dulles Airport Service</h4>
+                    <p>Limo service to IAD</p>
+                    <a href="#" class="matrix-link" aria-label="Book Dulles Limo Service">Dulles Limo Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>Ellicott City</h4>
+                    <p>Premium car service</p>
+                    <a href="#" class="matrix-link" aria-label="Book Ellicott City Car Service">Ellicott City Car Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>Frederick</h4>
+                    <p>Luxury limo service</p>
+                    <a href="#" class="matrix-link" aria-label="Book Frederick Limo Service">Frederick Limo Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>Germantown</h4>
+                    <p>Airport limo service</p>
+                    <a href="#" class="matrix-link" aria-label="Book Germantown Airport Limo">Germantown Airport Limo <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>Gaithersburg</h4>
+                    <p>Airport limo service</p>
+                    <a href="#" class="matrix-link" aria-label="Book Gaithersburg Airport Limo">Gaithersburg Airport Limo <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>York, PA to BWI</h4>
+                    <p>PA to MD transportation</p>
+                    <a href="#" class="matrix-link" aria-label="Book York PA BWI Car Service">York PA BWI Car Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+            <div class="matrix-item">
+                <div class="matrix-card">
+                    <h4>Annapolis to DC/VA</h4>
+                    <p>DCA, IAD Transfers</p>
+                    <a href="#" class="matrix-link" aria-label="Book Annapolis Limo and Car Service">Annapolis Limo and Car Service <span class="arrow">→</span></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact-section" aria-labelledby="contact-heading">
+    <div class="contact-container">
+        <div class="contact-grid">
+            
+            <!-- Left Side: Informational Stack -->
+            <div class="contact-info">
+                <span class="contact-tag">Support Center</span>
+                <h2 id="contact-heading">Get In Touch</h2>
+                <p class="contact-desc">Have questions? Our 24/7 dispatch team is ready to assist you with your luxury travel needs.</p>
+                
+                <div class="contact-methods">
+                    <a href="tel:4103655556" class="method-card" aria-label="Call our dispatch line at 410-365-5556">
+                        <div class="method-icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div class="method-details">
+                            <span class="method-label">24/7 Phone Support</span>
+                            <span class="method-value">240-351-0826</span>
+                        </div>
+                        <div class="method-details">
+                            <span class="method-label">24/7 Phone Support</span>
+                            <span class="method-value">914-752-8910</span>
+                        </div>
+                    </a>
+                    
+                    <a href="mailto:info@quantumcoresoftware.com" class="method-card" aria-label="Email our support team">
+                        <div class="method-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="method-details">
+                            <span class="method-label">Email Communications</span>
+                            <span class="method-value">Rominalimo2023@gmail.com</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Side: Django Booking/Contact Form Container -->
+            <div class="contact-card">
+                {% if messages %}
+                    <div class="messages-container">
+                        {% for message in messages %}
+                            <div class="alert alert-success" role="alert">
+                                <i class="fa-solid fa-circle-check"></i> {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                <form method="POST" action="{% url 'index' %}" class="premium-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="contact_form">
+                    
+                    <div class="input-group-row">
+                        <div class="input-field-wrapper">
+                            <input type="text" name="name" id="form-name" placeholder="Your Name" required>
+                        </div>
+                        <div class="input-field-wrapper">
+                            <input type="email" name="email" id="form-email" placeholder="Your Email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-field-wrapper">
+                        <input type="text" name="phone" id="form-phone" placeholder="Phone Number">
+                    </div>
+                    
+                    <div class="input-field-wrapper">
+                        <input type="text" name="subject" id="form-subject" placeholder="Subject">
+                    </div>
+                    
+                    <div class="input-field-wrapper">
+                        <textarea name="message" id="form-message" rows="4" placeholder="How can we help?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="contact-btn">
+                        <span>Send Message</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</section>
+{% endblock content %}

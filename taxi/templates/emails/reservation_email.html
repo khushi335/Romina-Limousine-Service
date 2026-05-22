@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .wrapper { width: 100%; max-width: 600px; margin: 0 auto; border: 1px solid #eee; }
+        .header { background: #1a1f36; color: #ffffff; padding: 20px; text-align: center; }
+        .header h1 { color: #f9d423; margin: 0; font-size: 20px; }
+        .content { padding: 30px; }
+        .details-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .details-table td { padding: 10px; border-bottom: 1px solid #eee; }
+        .label { font-weight: bold; color: #1a1f36; width: 40%; }
+        .footer { background: #f8f9fa; padding: 20px; text-align: center; font-size: 12px; color: #777; }
+        .highlight { color: #1e4ed8; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Columbia Limoz Service</h1>
+            <p>Reservation Confirmation</p>
+        </div>
+        <div class="content">
+            <p>Hello <strong>{{ res.name }}</strong>,</p>
+            <p>Your reservation for airport transportation has been successfully recorded. Below are your booking details:</p>
+            
+            <table class="details-table">
+                <tr>
+                    <td class="label">Date of Service:</td>
+                    <td>{{ res.date_of_service }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Pickup Time:</td>
+                    <td class="highlight">{{ res.pickup_time }}</td>
+                </tr>
+                <tr>
+                    <td class="label">From:</td>
+                    <td>{{ res.pickup_address }}</td>
+                </tr>
+                <tr>
+                    <td class="label">To:</td>
+                    <td>{{ res.dropoff_location }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Phone:</td>
+                    <td>{{ res.mobile_contact }}</td>
+                </tr>
+                {% if res.company_name %}
+                <tr>
+                    <td class="label">Company:</td>
+                    <td>{{ res.company_name }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td class="label">Special Notes:</td>
+                    <td>{{ res.special_notes|default:"None" }}</td>
+                </tr>
+            </table>
+
+            <p style="margin-top: 30px;">Our driver will contact you via text message prior to arrival. For airport pickups, we will track your flight status automatically.</p>
+        </div>
+        <div class="footer">
+            <p>Questions? Call or Text: (410) 365-5556</p>
+            <p>&copy; 2026 Columbia Limoz Service. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
