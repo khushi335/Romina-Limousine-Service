@@ -1189,6 +1189,33 @@ body {
         margin-right: 8px;
     }
 }
+/* 🔥 Lady Chauffeur Highlight Box */
+.lady-highlight {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(28, 37, 65, 0.25));
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    padding: 18px 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: #f8f9fa;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin-bottom: 25px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+.lady-highlight span {
+    color: #f1e6c8;
+}
+
+@keyframes glowPulse {
+    0% { border-color: rgba(212, 175, 55, 0.2); }
+    50% { border-color: rgba(212, 175, 55, 0.6); }
+    100% { border-color: rgba(212, 175, 55, 0.2); }
+}
 
 
 
