@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  :root {
+    --primary: #0b1f3a;   /* adjust to match your site */
+    --accent: #c8a45d;
+    --text: #ffffff;
+    --muted: #cfd6e4;
+    --bg: #071428;
+  }
+
+  .rates-section {
+    background: linear-gradient(180deg, var(--bg), #050e1d);
+    color: var(--text);
+    padding: 80px 20px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-heading .subtitle {
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  .section-heading h2 {
+    font-size: 36px;
+    margin: 10px 0;
+  }
+
+  .section-heading p {
+    color: var(--muted);
+    max-width: 700px;
+    margin: auto;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .rates-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .rates-table thead {
+    background: var(--primary);
+  }
+
+  .rates-table th,
+  .rates-table td {
+    padding: 16px;
+    text-align: left;
+  }
+
+  .rates-table th {
+    color: var(--accent);
+    font-size: 14px;
+  }
+
+  .rates-table td {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    color: var(--text);
+  }
+
+  .rates-table td span {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .rates-table small {
+    display: block;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* Hover */
+  .rates-table tbody tr:hover {
+    background: rgba(200, 164, 93, 0.08);
+  }
+
+  /* Mobile Cards */
+  @media (max-width: 768px) {
+    .rates-table thead {
+      display: none;
+    }
+
+    .rates-table,
+    .rates-table tbody,
+    .rates-table tr,
+    .rates-table td {
+      display: block;
+      width: 100%;
+    }
+
+    .rates-table tr {
+      margin-bottom: 15px;
+      background: rgba(255,255,255,0.05);
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .rates-table td {
+      padding: 10px 0;
+      border: none;
+    }
+
+    .rates-table td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+</style>
+
+<section class="rates-section">
+  <div class="container">
+
+    <div class="section-heading">
+      <span class="subtitle">Transparent Luxury Pricing</span>
+      <h2>BWI Airport Rates & Destinations</h2>
+      <p>
+        Professional airport transportation with premium comfort, reliable chauffeurs,
+        and fixed pricing.
+      </p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="rates-table">
+
+        <thead>
+          <tr>
+            <th>Route & Destination</th>
+            <th>Luxury Sedan <small>1–4 Passengers</small></th>
+            <th>Premium SUV <small>1–6 Passengers</small></th>
+            <th>Est. Travel Time</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td data-label="Route">
+              <strong>Washington DC</strong>
+              <span>Downtown, Capitol Hill, Georgetown</span>
+            </td>
+            <td data-label="Sedan">$125</td>
+            <td data-label="SUV">$170</td>
+            <td data-label="Time">45–60 mins</td>
+          </tr>
+
+          <tr>
+            <td><strong>Baltimore</strong><span>Inner Harbor, Fells Point</span></td>
+            <td>$75</td>
+            <td>$95</td>
+            <td>20–30 mins</td>
+          </tr>
+
+          <tr>
+            <td><strong>Annapolis</strong><span>State Capital, Naval Academy</span></td>
+            <td>$99</td>
+            <td>$115</td>
+            <td>30–40 mins</td>
+          </tr>
+
+          <tr>
+            <td><strong>Columbia</strong><span>Corporate Centers</span></td>
+            <td>$55</td>
+            <td>$95</td>
+            <td>25–35 mins</td>
+          </tr>
+
+          <tr>
+            <td><strong>Rockville</strong><span>Montgomery County</span></td>
+            <td>$121</td>
+            <td>$170</td>
+            <td>50–65 mins</td>
+          </tr>
+
+          <tr>
+            <td><strong>Silver Spring</strong><span>Downtown Offices</span></td>
+            <td>$90</td>
+            <td>$115</td>
+            <td>40–50 mins</td>
+          </tr>
+
+          <tr>
+            <td><strong>Frederick</strong><span>Business Hubs</span></td>
+            <td>$110</td>
+            <td>$145</td>
+            <td>50–65 mins</td>
+          </tr>
+
+          <tr>
+            <td><strong>Bethesda</strong><span>NIH, Medical Centers</span></td>
+            <td>$105</td>
+            <td>$140</td>
+            <td>45–55 mins</td>
+          </tr>
+
+          <tr>
+            <td><strong>York, PA</strong><span>Suburban Areas</span></td>
+            <td>$230</td>
+            <td>$308</td>
+            <td>70–90 mins</td>
+          </tr>
+
+          <!-- ✅ Added extra premium limo destinations (like Romina Limo Service style coverage) -->
+
+          <tr>
+            <td><strong>Reagan Airport (DCA)</strong><span>Washington DC Airport Transfers</span></td>
+            <td>$135</td>
+            <td>$180</td>
+            <td>45–60 mins</td>
+          </tr>
+
+          <tr>
+            <td><strong>Dulles Airport (IAD)</strong><span>International Airport Transfers</span></td>
+            <td>$160</td>
+            <td>$210</td>
+            <td>60–75 mins</td>
+          </tr>
+
+          <tr>
+            <td><strong>Philadelphia</strong><span>Center City, Business District</span></td>
+            <td>$320</td>
+            <td>$420</td>
+            <td>2–2.5 hrs</td>
+          </tr>
+
+          <tr>
+            <td><strong>New York City</strong><span>Manhattan, Brooklyn, Queens</span></td>
+            <td>$650</td>
+            <td>$850</td>
+            <td>4–5 hrs</td>
+          </tr>
+
+          <tr>
+            <td><strong>Virginia Beach</strong><span>Coastal Travel & Resorts</span></td>
+            <td>$380</td>
+            <td>$520</td>
+            <td>3.5–4.5 hrs</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

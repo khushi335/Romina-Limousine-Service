@@ -185,3 +185,6 @@ def fleet(request):
     
 def service(request):
     return render(request, 'taxi/service.html')
+    
+def our_rate(request):
+    return render(request, 'taxi/rate.html')
