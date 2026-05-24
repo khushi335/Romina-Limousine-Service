@@ -640,34 +640,41 @@ body {
         TOP LOGO
 ========================================== */
 
-.hero-top-logo{
+.hero-top-logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px
-    margin-top: 10px;
-
+    /* Fixed missing semicolon here */
+    margin-bottom: 20px; 
+    margin-top: 20px;
+    width: 100%;
     animation: logoFloat 5s ease-in-out infinite;
 }
 
-.hero-top-logo img{
-    width: 155px;
-    max-width: 90%;
+.hero-top-logo img {
+    /* Responsive sizing */
+    width: 100%; 
+    max-width: 155px; /* Default size for desktops */
+    height: auto;
     object-fit: contain;
 
-    filter:
-    drop-shadow(0 10px 25px rgba(0,0,0,0.45))
-    drop-shadow(0 0 25px rgba(212,175,55,0.25));
+    filter: drop-shadow(0 10px 25px rgba(0,0,0,0.45))
+            drop-shadow(0 0 25px rgba(212,175,55,0.25));
 
     transition: 0.4s ease;
 }
 
-.hero-top-logo img:hover{
-    transform: scale(1.04);
+/* Mobile Optimization: Slightly shrink logo on very small screens */
+@media (max-width: 480px) {
+    .hero-top-logo img {
+        max-width: 120px;
+    }
+}
 
-    filter:
-    drop-shadow(0 15px 35px rgba(0,0,0,0.55))
-    drop-shadow(0 0 35px rgba(212,175,55,0.45));
+.hero-top-logo img:hover {
+    transform: scale(1.04);
+    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.55))
+            drop-shadow(0 0 35px rgba(212,175,55,0.45));
 }
 
 /* ==========================================
@@ -900,19 +907,18 @@ body {
     .hero-premium-section{
         min-height: auto;
         height: auto;
-        padding: 100px 0;
+        padding: 5px 0; 
     }
 
     .hero-description-card{
         padding: 24px;
     }
-
 }
 
 @media(max-width:768px){
 
     .hero-inner-content{
-        padding: 80px 18px;
+        padding: 40px 18px;
     }
 
     .hero-top-logo img{
@@ -969,6 +975,13 @@ body {
     .btn-outline{
         padding: 14px 18px;
         font-size: 0.82rem;
+    }
+    .hero-top-logo {
+        margin-top: 0;      /* Removes extra top margin on logo */
+        margin-bottom: 10px;
+    }
+    .hero-inner-content {
+        padding: 20px 15px; /* Even tighter for small screens */
     }
 
 }
