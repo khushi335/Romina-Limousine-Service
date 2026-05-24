@@ -10,6 +10,4 @@ urlpatterns = [
     path('service/', views.service, name='service'),
     path('fleet/', views.fleet, name='fleet'),
     path('contact/', views.contact, name='contact'),
-    # path('blog/', views.blog, name='blog'),
-    # path('about', views.about, name='about'),
 ]

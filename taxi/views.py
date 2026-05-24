@@ -8,68 +8,13 @@ from datetime import datetime
 from .models import Booking, ContactMessage, Reservation
 
 def index(request):
-    # Get the admin email from settings, fallback if not found
-    admin_recipient = getattr(settings, 'ADMIN_EMAIL', 'sahkhushi946@gmail.com')
+    admin_recipient = getattr(settings, 'ADMIN_EMAIL', ['sahkhushi946@gmail.com'])
 
     if request.method == 'POST':
         form_type = request.POST.get('form_type')
 
-        # ---------------------------------------------------------
-        # 1. LUXURY BOOKING FORM HANDLER
-        # ---------------------------------------------------------
-        if form_type == 'booking_form':
-            name = request.POST.get('name')
-            email = request.POST.get('email')
-            phone = request.POST.get('phone')
-            raw_date = request.POST.get('service_date')
-            time = request.POST.get('pickup_time')
-            pickup = request.POST.get('pickup_address')
-            dropoff = request.POST.get('dropoff_address')
-            company = request.POST.get('company', '')
-            notes = request.POST.get('notes', '')
-
-            try:
-                formatted_date = datetime.strptime(raw_date, '%m/%d/%Y').strftime('%Y-%m-%d')
-            except:
-                formatted_date = raw_date 
-
-            # Save to Database
-            Booking.objects.create(
-                full_name=name, email=email, phone=phone,
-                service_date=formatted_date, pickup_time=time,
-                pickup_address=pickup, dropoff_location=dropoff,
-                company=company, special_notes=notes
-            )
-
-            # --- Emails for Booking ---
-            admin_subject = f"🚨 NEW BOOKING: {name} - {formatted_date}"
-            admin_body = f"Customer: {name}\nPhone: {phone}\nPick-up: {pickup}\nDrop-off: {dropoff}\nDate: {formatted_date} at {time}\nNotes: {notes}"
-            
-            # Send to Admin (sahkhushi946@gmail.com)
-            send_mail(
-                admin_subject, 
-                admin_body, 
-                settings.DEFAULT_FROM_EMAIL, 
-                [admin_recipient], 
-                fail_silently=False
-            )
-
-            # Send Confirmation to Customer
-            send_mail(
-                "Booking Received - Columbia Limozn", 
-                f"Dear {name}, we received your booking for {formatted_date}. We will contact you shortly.", 
-                settings.DEFAULT_FROM_EMAIL, 
-                [email], 
-                fail_silently=False
-            )
-
-            messages.success(request, "Your booking request was successful! Check your email for confirmation.")
-            return redirect('index')
-
-        # ---------------------------------------------------------
-        # 2. CONTACT FORM HANDLER
-        # ---------------------------------------------------------
-        elif form_type == 'contact_form':
+        # Logic: Initial 'if' for the first form type
+        if form_type == 'contact_form':
             name = request.POST.get('name')
             email = request.POST.get('email')
             phone = request.POST.get('phone')
@@ -83,24 +28,22 @@ def index(request):
 
             context = {
                 'name': name, 'email': email, 'phone': phone, 
-                'subject': subject, 'message': message_body
+                'subject': subject, 'message': message_body,'inquiry_date': datetime.now().strftime("%B %d, %Y")
             }
             
-            # Email to Admin (sahkhushi946@gmail.com)
             admin_html = render_to_string('emails/admin_new_contact.html', context)
             admin_msg = EmailMultiAlternatives(
                 f"New Inquiry: {subject}", 
                 strip_tags(admin_html), 
                 settings.DEFAULT_FROM_EMAIL, 
-                [admin_recipient] # Updated to use settings variable
+                admin_recipient
             )
             admin_msg.attach_alternative(admin_html, "text/html")
             admin_msg.send(fail_silently=False)
 
-            # Email to Customer
             cust_html = render_to_string('emails/customer_reply.html', context)
             cust_msg = EmailMultiAlternatives(
-                "Message Received - Columbia Limozn", 
+                "Message Received - Romina Limousine Service", 
                 strip_tags(cust_html), 
                 settings.DEFAULT_FROM_EMAIL, 
                 [email]
@@ -108,19 +51,10 @@ def index(request):
             cust_msg.attach_alternative(cust_html, "text/html")
             cust_msg.send(fail_silently=False)
 
-            messages.success(request, "Your message has been sent. Thank you for contacting us!")
-            return redirect('index')
+            messages.success(request, "Your message has been sent. Thank you!")
+            return redirect('/#contact-card')
 
     return render(request, 'taxi/index.html')
-    
-
-
-
-from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.contrib import messages
-from .models import Reservation # Ensure this is imported
 
 def make_reservation(request):
     if request.method == "POST":
@@ -130,6 +64,7 @@ def make_reservation(request):
         ampm = request.POST.get('ampm')
         full_time = f"{hh}:{mm} {ampm}"
 
+        # Create the object
         res = Reservation.objects.create(
             name=request.POST.get('name'),
             date_of_service=request.POST.get('date'),
@@ -142,14 +77,16 @@ def make_reservation(request):
             special_notes=request.POST.get('notes'),
         )
 
-        # Email Logic - Pull from settings.py
-        subject = 'Reservation Confirmation - Columbia Limousine Service'
+        # Email Logic
+        subject = 'Reservation Confirmation - Romina Limousine Service'
         from_email = settings.DEFAULT_FROM_EMAIL
         
-        # Recipient list: The customer AND the admin
-        recipient_list = [res.email, settings.ADMIN_EMAIL]
+        # Ensure recipient_list is a flat list
+        admin_email = getattr(settings, 'ADMIN_EMAIL', 'sahkhushi946@gmail.com')
+        recipient_list = [res.email, admin_email]
 
-        html_content = render_to_string('emails/reservation_email.html', {'res': res})
+        # Use 'reservation' as the key to match the template
+        html_content = render_to_string('taxi/reservation_receipt.html', {'reservation': res})
         
         try:
             email = EmailMultiAlternatives(
@@ -159,10 +96,9 @@ def make_reservation(request):
                 recipient_list
             )
             email.attach_alternative(html_content, "text/html")
-            email.send(fail_silently=False) # fail_silently=False helps debug
+            email.send(fail_silently=False)
             messages.success(request, "Your reservation has been submitted successfully!")
         except Exception as e:
-            # This will show you the exact error in your console/logs
             print(f"Email Error: {e}")
             messages.error(request, "Reservation saved, but email confirmation failed.")
 
@@ -192,8 +128,56 @@ def cities_served(request):
     }
     return render(request, 'taxi/cities.html', context)
     
-    
 def contact(request):
+    if request.method == 'POST':
+        # Extract form data
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        project = request.POST.get('project', 'General Inquiry')
+        subject = request.POST.get('subject')
+        message_body = request.POST.get('message')
+
+        # 1. Save to Database
+        ContactMessage.objects.create(
+            full_name=name, email=email, phone=phone,
+            subject=subject, message=message_body
+        )
+
+        context = {
+            'name': name, 'email': email, 'phone': phone, 
+            'project': project, 'subject': subject, 'message': message_body,'inquiry_date': datetime.now().strftime("%B %d, %Y")
+        }
+
+        # 2. Send Email to Admin(s)
+        # settings.ADMIN_EMAIL is expected to be a list from your config
+        admin_html = render_to_string('emails/admin_new_contact.html', context)
+        admin_msg = EmailMultiAlternatives(
+            f"New Inquiry: {subject}", 
+            strip_tags(admin_html), 
+            settings.DEFAULT_FROM_EMAIL, 
+            settings.ADMIN_EMAIL 
+        )
+        admin_msg.attach_alternative(admin_html, "text/html")
+        admin_msg.send(fail_silently=False)
+
+        # 3. Send Confirmation Email to Customer
+        cust_html = render_to_string('emails/customer_reply.html', context)
+        cust_msg = EmailMultiAlternatives(
+            "Message Received - Romina Limousine Service", 
+            strip_tags(cust_html), 
+            settings.DEFAULT_FROM_EMAIL, 
+            [email]
+        )
+        cust_msg.attach_alternative(cust_html, "text/html")
+        cust_msg.send(fail_silently=False)
+
+        # 4. Success Feedback
+        messages.success(request, "Your message has been sent successfully. Thank you for contacting Romina Limousine!")
+        
+        # Redirect back to the contact page
+        return redirect('contact') 
+
     return render(request, 'taxi/contact.html')
     
 def fleet(request):

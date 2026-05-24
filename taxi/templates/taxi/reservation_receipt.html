@@ -34,42 +34,40 @@
     </style>
 </head>
 <body>
-    <h2>Car Reservation Receipt</h2>
+    <h2 style="color: #0f172a; text-align: center;">Reservation Receipt</h2>
 
-    <p>Hello {{ reservation.email }},</p>
-    <p>Thank you for booking with us. Below are your reservation details:</p>
+    <p>Hello {{ reservation.name }},</p>
+    <p>Thank you for booking with Romina Limousine Service. Here are your details:</p>
 
-    <div class="details">
-        <table>
-            <tr>
-                <th>Car Type</th>
-                <td>{{ reservation.car_type }}</td>
-            </tr>
-            <tr>
-                <th>Pick-Up Location</th>
-                <td>{{ reservation.pick_up_location }}</td>
-            </tr>
-            <tr>
-                <th>Drop-Off Location</th>
-                <td>{{ reservation.drop_off_location }}</td>
-            </tr>
-            <tr>
-                <th>Pick-Up Date & Time</th>
-                <td>{{ reservation.pick_up_date }} at {{ reservation.pick_up_time }}</td>
-            </tr>
-            <tr>
-                <th>Drop-Off Date & Time</th>
-                <td>{{ reservation.drop_off_date }} at {{ reservation.drop_off_time }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ reservation.email }}</td>
-            </tr>
-        </table>
-    </div>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <tr style="border-bottom: 1px solid #ddd;">
+            <th style="text-align: left; padding: 8px;">Name:</th>
+            <td style="padding: 8px;">{{ reservation.name }}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #ddd;">
+            <th style="text-align: left; padding: 8px;">Date:</th>
+            <td style="padding: 8px;">{{ reservation.date_of_service }}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #ddd;">
+            <th style="text-align: left; padding: 8px;">Time:</th>
+            <td style="padding: 8px;">{{ reservation.pickup_time }}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #ddd;">
+            <th style="text-align: left; padding: 8px;">Pickup:</th>
+            <td style="padding: 8px;">{{ reservation.pickup_address }}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #ddd;">
+            <th style="text-align: left; padding: 8px;">Destination:</th>
+            <td style="padding: 8px;">{{ reservation.dropoff_location }}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #ddd;">
+            <th style="text-align: left; padding: 8px;">Contact:</th>
+            <td style="padding: 8px;">{{ reservation.mobile_contact }}</td>
+        </tr>
+    </table>
 
-    <div class="footer">
-        This is an automated receipt. Please contact support if you have any questions.
-    </div>
+    <p style="margin-top: 30px; font-size: 12px; color: #64748b; text-align: center;">
+        This is an automated confirmation. We will be in touch shortly.
+    </p>
 </body>
 </html>
