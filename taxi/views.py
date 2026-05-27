@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
 from datetime import datetime
-from .models import Booking, ContactMessage, Reservation
+from .models import ContactMessage, Reservation
 
 def index(request):
     admin_recipient = getattr(settings, 'ADMIN_EMAIL', ['sahkhushi946@gmail.com'])
@@ -56,58 +56,173 @@ def index(request):
 
     return render(request, 'taxi/index.html')
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.urls import reverse
+from django.conf import settings
+from urllib.parse import urlencode
+import uuid
+from datetime import date, time # Ensure these are imported
+
+from .models import Reservation, Vehicle
+from .forms import Step1Form, Step3Form
+from .utils import _finalize_reservation
+from .services.payment import create_checkout_session
+
 def make_reservation(request):
-    if request.method == "POST":
-        # Combine Time Fields
-        hh = request.POST.get('hh')
-        mm = request.POST.get('mm')
-        ampm = request.POST.get('ampm')
-        full_time = f"{hh}:{mm} {ampm}"
+    step = int(request.GET.get("step", 1))
 
-        # Create the object
-        res = Reservation.objects.create(
-            name=request.POST.get('name'),
-            date_of_service=request.POST.get('date'),
-            pickup_time=full_time,
-            pickup_address=request.POST.get('from'),
-            dropoff_location=request.POST.get('to'),
-            email=request.POST.get('email'),
-            mobile_contact=request.POST.get('mobile'),
-            company_name=request.POST.get('company'),
-            special_notes=request.POST.get('notes'),
-        )
+    # STEP 1
+    if step == 1:
+        form = Step1Form(request.POST or None)
 
-        # Email Logic
-        subject = 'Reservation Confirmation - Romina Limousine Service'
-        from_email = settings.DEFAULT_FROM_EMAIL
-        
-        # Ensure recipient_list is a flat list
-        admin_email = getattr(settings, 'ADMIN_EMAIL', 'sahkhushi946@gmail.com')
-        recipient_list = [res.email, admin_email]
+        if request.method == "POST":
+            if form.is_valid():
+                # FIX: Create a copy and convert date/time to ISO strings for JSON serialization
+                data = form.cleaned_data.copy()
+                data['pickup_date'] = data['pickup_date'].isoformat()
+                data['pickup_time'] = data['pickup_time'].isoformat()
+                
+                request.session["step1"] = data
+                return redirect("/reservation/?step=2")
+            else:
+                print(form.errors)
 
-        # Use 'reservation' as the key to match the template
-        html_content = render_to_string('taxi/reservation_receipt.html', {'reservation': res})
-        
-        try:
-            email = EmailMultiAlternatives(
-                subject, 
-                "New Reservation Details", 
-                from_email, 
-                recipient_list
-            )
-            email.attach_alternative(html_content, "text/html")
-            email.send(fail_silently=False)
-            messages.success(request, "Your reservation has been submitted successfully!")
-        except Exception as e:
-            print(f"Email Error: {e}")
-            messages.error(request, "Reservation saved, but email confirmation failed.")
+        return render(request, "taxi/reservation.html", {
+            "current_step": 1,
+            "form": form
+        })
 
-        return redirect('reservation_success')
+    # STEP 2
+    elif step == 2:
+        vehicles = Vehicle.objects.all()
 
-    return render(request, 'taxi/reservation.html')
+        if request.method == "POST":
+            vehicle_id = request.POST.get("selected_vehicle_id")
+            if not vehicle_id:
+                messages.error(request, "Please select a vehicle.")
+                return redirect("/reservation/?step=2")
 
-def reservation_success(request):
-    return render(request, 'taxi/success.html')
+            request.session["vehicle_id"] = vehicle_id
+            return redirect("/reservation/?step=3")
+
+        return render(request, "taxi/reservation.html", {
+            "current_step": 2,
+            "vehicles": vehicles
+        })
+
+    # STEP 3
+    elif step == 3:
+        form = Step3Form(request.POST or None)
+
+        if request.method == "POST":
+            if form.is_valid():
+                step1_raw = request.session.get("step1")
+                
+                # FIX: Deserialize the strings back into date/time objects
+                step1 = step1_raw.copy()
+                step1['pickup_date'] = date.fromisoformat(step1['pickup_date'])
+                step1['pickup_time'] = time.fromisoformat(step1['pickup_time'])
+                
+                vehicle = get_object_or_404(Vehicle, id=request.session.get("vehicle_id"))
+
+                data = {**step1, **form.cleaned_data, "vehicle": vehicle}
+
+                reservation = _finalize_reservation(
+                    request,
+                    data,
+                    payment_status="pending"
+                )
+
+                return redirect("booking_confirmation", reservation.confirmation_number)
+            else:
+                print(form.errors)
+
+        return render(request, "taxi/reservation.html", {
+            "current_step": 3,
+            "form": form
+        })
+
+
+# -------------------
+# STRIPE SUCCESS
+# -------------------
+def stripe_success(request):
+    step1 = request.session.get("step1")
+    vehicle = get_object_or_404(Vehicle, id=request.session.get("vehicle_id"))
+
+    data = {
+        **step1,
+        "vehicle": vehicle
+    }
+
+    reservation = _finalize_reservation(
+        request,
+        data,
+        payment_status="paid",
+        transaction_id="stripe"
+    )
+
+    return redirect("booking_confirmation", reservation.confirmation_number)
+
+
+# -------------------
+# BOOKING CONFIRMATION
+# -------------------
+def booking_confirmation(request, confirmation_number):
+    reservation = get_object_or_404(Reservation, confirmation_number=confirmation_number)
+
+    return render(request, "taxi/booking_confirmation.html", {
+        "reservation": reservation
+    })
+
+# -------------------
+# PAYPAL
+# -------------------
+def paypal_process(request):
+    data = {
+        **request.session.get("step1", {}),
+    }
+
+    amount = data.get("price", 0)
+    invoice_id = str(uuid.uuid4())
+
+    params = {
+        "cmd": "_xclick",
+        "business": settings.PAYPAL_PERSONAL_EMAIL,
+        "item_name": "Limousine Booking",
+        "item_number": invoice_id,
+        "amount": amount,
+        "currency_code": "USD",
+        "return": request.build_absolute_uri(reverse("paypal_return")),
+        "cancel_return": request.build_absolute_uri(reverse("paypal_cancel")),
+    }
+
+    return redirect(f"{settings.PAYPAL_URL}?{urlencode(params)}")
+
+
+def paypal_return(request):
+    step1 = request.session.get("step1")
+    vehicle = get_object_or_404(Vehicle, id=request.session.get("vehicle_id"))
+
+    data = {
+        **step1,
+        "vehicle": vehicle
+    }
+
+    reservation = _finalize_reservation(
+        request,
+        data,
+        payment_status="paypal_paid",
+        transaction_id=request.GET.get("tx")
+    )
+
+    return redirect("booking_confirmation", reservation.confirmation_number)
+
+
+def paypal_cancel(request):
+    messages.error(request, "Payment cancelled.")
+    return redirect("make_reservation")
     
 def cities_served(request):
     context = {

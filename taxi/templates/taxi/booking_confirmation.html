@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+:root{
+    --primary-navy:#0f172a;
+    --luxury-gold:#e2b04a;
+    --text-muted:#64748b;
+}
+
+.confirmation-page {
+    padding: 80px 15px;
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+    min-height: 90vh;
+}
+
+.confirmation-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.15);
+    padding: 50px 40px;
+    border-top: 6px solid var(--luxury-gold);
+    max-width: 1000px;
+    margin: auto;
+}
+
+.confirmation-icon {
+    color: var(--luxury-gold);
+    font-size: 4.5rem;
+    margin-bottom: 15px;
+}
+
+h1 {
+    color: var(--primary-navy);
+    font-weight: 800;
+}
+
+.lead {
+    color: var(--text-muted);
+}
+
+.confirmation-number-box {
+    background: linear-gradient(135deg, #fff7e0, #fff);
+    border: 1px solid rgba(226, 176, 74, 0.5);
+    padding: 18px 30px;
+    margin: 35px auto;
+    border-radius: 14px;
+    display: inline-block;
+}
+
+.confirmation-number-box p {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary-navy);
+    margin: 0;
+    word-break: break-word;
+}
+
+.summary-list h4 {
+    color: var(--primary-navy);
+    font-weight: 700;
+    border-bottom: 2px solid var(--luxury-gold);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.summary-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.summary-list ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eef2f7;
+    color: var(--text-muted);
+}
+
+.summary-list ul li strong {
+    color: var(--primary-navy);
+    width: 160px;
+    display: inline-block;
+}
+
+.btn-dark {
+    background: var(--primary-navy);
+    border: none;
+}
+
+.btn-metal-yellow {
+    background: var(--luxury-gold);
+    border: none;
+    color: var(--primary-navy);
+}
+</style>
+
+<div class="container confirmation-page">
+    <div class="confirmation-card text-center">
+
+        <i class="fas fa-check-circle confirmation-icon"></i>
+
+        <h1>RESERVATION CONFIRMED</h1>
+
+        <p class="lead">
+            Thank you <strong>{{ reservation.first_name }}</strong>,
+            your booking has been successfully confirmed.
+            A confirmation has been sent to <strong>{{ reservation.email }}</strong>.
+        </p>
+
+        <!-- CONFIRMATION NUMBER -->
+        <div class="confirmation-number-box">
+            <small class="text-muted text-uppercase">Confirmation Number</small>
+            <p>{{ reservation.confirmation_number }}</p>
+        </div>
+
+        <!-- DETAILS -->
+        <div class="row text-start mt-4 summary-list">
+
+            <!-- LEFT SIDE -->
+            <div class="col-md-6">
+                <h4>Trip Details</h4>
+                <ul>
+                    <li><strong>Pickup Date:</strong> {{ reservation.pickup_date }}</li>
+                    <li><strong>Pickup Time:</strong> {{ reservation.pickup_time }}</li>
+                    <li><strong>Pickup Location:</strong> {{ reservation.pickup_location }}</li>
+                    <li><strong>Dropoff Location:</strong> {{ reservation.dropoff_location }}</li>
+                    <li><strong>Passengers:</strong> {{ reservation.passengers }}</li>
+                </ul>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="col-md-6">
+                <h4>Customer & Payment</h4>
+                <ul>
+                    <li><strong>Name:</strong> {{ reservation.first_name }} {{ reservation.last_name }}</li>
+                    <li><strong>Email:</strong> {{ reservation.email }}</li>
+                    <li><strong>Phone:</strong> {{ reservation.phone_number }}</li>
+                    <li><strong>Vehicle:</strong> {{ reservation.vehicle.name }}</li>
+                    <li><strong>Payment Method:</strong> {{ reservation.get_payment_method_display }}</li>
+                    <li><strong>Payment Status:</strong> {{ reservation.payment_status }}</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="mt-5">
+            <p class="text-muted">
+                Need help? Call us anytime at <strong>240-351-0826</strong>
+            </p>
+
+            <div class="d-flex justify-content-center gap-3 mt-3">
+                <a href="{% url 'index' %}" class="btn btn-dark">
+                    <i class="fas fa-home"></i> Home
+                </a>
+
+                <a href="{% url 'make_reservation' %}?step=1" class="btn btn-metal-yellow">
+                    <i class="fas fa-car"></i> New Booking
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

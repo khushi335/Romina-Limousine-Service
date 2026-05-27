@@ -76,6 +76,35 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
+
+STRIPE_SECRET_KEY = "sk_live_xxx"
+STRIPE_WEBHOOK_SECRET = "whsec_xxx"
+STRIPE_PUBLIC_KEY = "pk_live_xxx"
+
+TWILIO_SID = "xxx"
+TWILIO_AUTH_TOKEN = "xxx"
+TWILIO_WHATSAPP = "whatsapp:+9779821837931"
+
+ADMIN_PHONES = [
+    "ADMIN_PHONE_PLACEHOLDER",
+    "9821837931",
+    "240-351-0826"
+]
+
+GOOGLE_CALENDAR_ID = "primary"
+
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+TWILIO_SID = os.environ.get("TWILIO_SID")
+TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
+TWILIO_WHATSAPP = "whatsapp:+9779821837931"
+
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -176,7 +205,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
