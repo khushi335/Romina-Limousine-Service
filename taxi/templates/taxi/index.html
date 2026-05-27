@@ -162,7 +162,7 @@
                     </div>
 
                     <div class="stat-item">
-                        <span class="stat-number">15 Min</span>
+                        <span class="stat-number">Within Half Hour</span>
                         <span class="stat-label">Rapid Pickup</span>
                     </div>
 
@@ -423,9 +423,9 @@
 <section class="fleet-section" aria-label="Romina Limousine Fleet Showcase">
     <header class="fleet-header">
         <span class="fleet-top-label">The Fleet Standard</span>
-        <h2 class="fleet-main-title">Our Premium Cadillac Fleet</h2>
+        <h2 class="fleet-main-title">Our Cadilac Escalade platinum luxury esv Fleet</h2>
         <p class="fleet-intro">
-            As an elite corporate and airport transportation provider, Romina Limousine sets the benchmark for executive travel. Our meticulously detailed fleet is anchored by luxury Cadillac vehicles, promising unmatched comfort, privacy, and technical refinement for your journey.
+            As an elite corporate and airport transportation provider, Romina Limousine sets the benchmark for executive travel. Our meticulously detailed fleet is anchored by Cadilac Escalade platinum luxury esv vehicles, promising unmatched comfort, privacy, and technical refinement for your journey.
         </p>
         <div class="fleet-divider"><span></span></div>
     </header>
@@ -435,13 +435,13 @@
             <article class="vehicle-card hero-vehicle">
                 <!-- Image Wrapper Column -->
                 <div class="vehicle-image-wrapper">
-                    <img src="{% static 'img/cadillac.jpg' %}" alt="Romina Limousine Premium Cadillac Fleet">
+                    <img src="{% static 'img/cadillac_car.jpeg' %}" alt="Romina Limousine Premium Cadillac Fleet">
                     <div class="vehicle-overlay-tag">Executive Class</div>
                 </div>
                 
                 <!-- Content Column -->
                 <div class="vehicle-info">
-                    <h3>Cadillac Luxury Series</h3>
+                    <h3>Cadilac Escalade Platinum Luxury ESV</h3>
                     <span class="vehicle-sub-tag">The Pinnacle of Chauffeur Driven Comfort</span>
                     
                     <div class="specs-box">
@@ -600,6 +600,21 @@
     </div>
 </section>
 
+<section class="hero-video-container">
+    <video autoplay muted loop playsinline poster="{% static 'img/fallback_image.jpg' %}" class="hero-video">
+        <source src="{% static 'img/cadillac_car.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <h1>Experience the Pinnacle of Private Travel</h1>
+            <p>Elite, late-model private fleet for your executive and airport transportation.</p>
+            <a href="{% url 'make_reservation' %}" class="cta-button">Book Your Ride</a>
+        </div>
+    </div>
+</section>
+
 <section class="rates-section">
   <div class="container">
     <div class="section-heading">
@@ -748,7 +763,7 @@
         
         <header class="matrix-header">
             <span class="matrix-badge">Regional Coverage</span>
-            <h2 id="matrix-heading" class="matrix-title">Premium Car & Limo Services Across MD, VA & DC</h2>
+            <h2 id="matrix-heading" class="matrix-title">Best Services</h2>
             <p class="matrix-subtitle">Explore our luxury transportation services in neighboring cities and airports.</p>
             <div class="matrix-accent"></div>
         </header>
