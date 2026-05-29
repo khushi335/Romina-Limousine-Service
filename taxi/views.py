@@ -1,11 +1,18 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
 from datetime import datetime
-from .models import ContactMessage, Reservation
+from .models import ContactMessage, Reservation, Vehicle
+from django.urls import reverse
+from urllib.parse import urlencode
+import uuid
+from datetime import date, time
+from .forms import Step1Form, Step3Form
+from .utils import _finalize_reservation
+from .services.payment import create_checkout_session
 
 def index(request):
     admin_recipient = getattr(settings, 'ADMIN_EMAIL', ['sahkhushi946@gmail.com'])
@@ -56,77 +63,109 @@ def index(request):
 
     return render(request, 'taxi/index.html')
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from django.urls import reverse
-from django.conf import settings
-from urllib.parse import urlencode
-import uuid
-from datetime import date, time # Ensure these are imported
 
-from .models import Reservation, Vehicle
-from .forms import Step1Form, Step3Form
-from .utils import _finalize_reservation
-from .services.payment import create_checkout_session
 
 def make_reservation(request):
     step = int(request.GET.get("step", 1))
 
+    # =========================
     # STEP 1
+    # =========================
     if step == 1:
         form = Step1Form(request.POST or None)
 
         if request.method == "POST":
             if form.is_valid():
-                # FIX: Create a copy and convert date/time to ISO strings for JSON serialization
                 data = form.cleaned_data.copy()
-                data['pickup_date'] = data['pickup_date'].isoformat()
-                data['pickup_time'] = data['pickup_time'].isoformat()
-                
+
+                # convert date/time for session
+                data["pickup_date"] = data["pickup_date"].isoformat()
+                data["pickup_time"] = data["pickup_time"].isoformat()
+
                 request.session["step1"] = data
+
                 return redirect("/reservation/?step=2")
+
             else:
                 print(form.errors)
 
-        return render(request, "taxi/reservation.html", {
-            "current_step": 1,
-            "form": form
-        })
+        return render(
+            request,
+            "taxi/reservation.html",
+            {
+                "current_step": 1,
+                "form": form,
+            },
+        )
 
+    # =========================
     # STEP 2
+    # =========================
     elif step == 2:
         vehicles = Vehicle.objects.all()
 
         if request.method == "POST":
             vehicle_id = request.POST.get("selected_vehicle_id")
+
             if not vehicle_id:
-                messages.error(request, "Please select a vehicle.")
+                messages.error(
+                    request,
+                    "Please select a vehicle."
+                )
                 return redirect("/reservation/?step=2")
 
             request.session["vehicle_id"] = vehicle_id
+
             return redirect("/reservation/?step=3")
 
-        return render(request, "taxi/reservation.html", {
-            "current_step": 2,
-            "vehicles": vehicles
-        })
+        return render(
+            request,
+            "taxi/reservation.html",
+            {
+                "current_step": 2,
+                "vehicles": vehicles,
+            },
+        )
 
+    # =========================
     # STEP 3
+    # =========================
     elif step == 3:
         form = Step3Form(request.POST or None)
 
         if request.method == "POST":
             if form.is_valid():
-                step1_raw = request.session.get("step1")
-                
-                # FIX: Deserialize the strings back into date/time objects
-                step1 = step1_raw.copy()
-                step1['pickup_date'] = date.fromisoformat(step1['pickup_date'])
-                step1['pickup_time'] = time.fromisoformat(step1['pickup_time'])
-                
-                vehicle = get_object_or_404(Vehicle, id=request.session.get("vehicle_id"))
 
-                data = {**step1, **form.cleaned_data, "vehicle": vehicle}
+                step1_raw = request.session.get("step1")
+
+                if not step1_raw:
+                    messages.error(
+                        request,
+                        "Session expired. Please start again."
+                    )
+                    return redirect("/reservation/?step=1")
+
+                # convert session strings back
+                step1 = step1_raw.copy()
+
+                step1["pickup_date"] = date.fromisoformat(
+                    step1["pickup_date"]
+                )
+
+                step1["pickup_time"] = time.fromisoformat(
+                    step1["pickup_time"]
+                )
+
+                vehicle = get_object_or_404(
+                    Vehicle,
+                    id=request.session.get("vehicle_id")
+                )
+
+                data = {
+                    **step1,
+                    **form.cleaned_data,
+                    "vehicle": vehicle,
+                }
 
                 reservation = _finalize_reservation(
                     request,
@@ -134,14 +173,38 @@ def make_reservation(request):
                     payment_status="pending"
                 )
 
-                return redirect("booking_confirmation", reservation.confirmation_number)
+                # slot already taken
+                if reservation is None:
+                    return render(
+                        request,
+                        "taxi/reservation.html",
+                        {
+                            "current_step": 3,
+                            "form": form,
+                        },
+                    )
+
+                return redirect(
+                    "booking_confirmation",
+                    reservation.confirmation_number
+                )
+
             else:
                 print(form.errors)
 
-        return render(request, "taxi/reservation.html", {
-            "current_step": 3,
-            "form": form
-        })
+        return render(
+            request,
+            "taxi/reservation.html",
+            {
+                "current_step": 3,
+                "form": form,
+            },
+        )
+
+    # =========================
+    # fallback
+    # =========================
+    return redirect("/reservation/?step=1")
 
 
 # -------------------
