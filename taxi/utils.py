@@ -57,3 +57,26 @@ def _finalize_reservation(
         print("Calendar error:", e)
 
     return reservation
+    
+from twilio.rest import Client
+from django.conf import settings
+
+
+def send_whatsapp_message(to_number, message):
+    try:
+        client = Client(
+            settings.TWILIO_SID,
+            settings.TWILIO_AUTH_TOKEN
+        )
+
+        client.messages.create(
+            body=message,
+            from_=settings.TWILIO_WHATSAPP,
+            to=f"whatsapp:{to_number}"
+        )
+
+        return True
+
+    except Exception as e:
+        print("WhatsApp Error:", e)
+        return False

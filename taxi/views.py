@@ -13,6 +13,7 @@ from datetime import date, time
 from .forms import Step1Form, Step3Form
 from .utils import _finalize_reservation
 from .services.payment import create_checkout_session
+from .utils import send_whatsapp_message
 
 def index(request):
     admin_recipient = getattr(settings, 'ADMIN_EMAIL', ['sahkhushi946@gmail.com'])
@@ -62,8 +63,6 @@ def index(request):
             return redirect('/#contact-card')
 
     return render(request, 'taxi/index.html')
-
-
 
 def make_reservation(request):
     step = int(request.GET.get("step", 1))
@@ -184,6 +183,25 @@ def make_reservation(request):
                         },
                     )
 
+                # =========================
+                # SEND WHATSAPP
+                # =========================
+                message = (
+                    f"🚖 New Reservation\n\n"
+                    f"Name: {reservation.first_name}\n"
+                    f"Date: {reservation.pickup_date}\n"
+                    f"Time: {reservation.pickup_time}\n"
+                    f"Pickup: {reservation.pickup_location}\n"
+                    f"Dropoff: {reservation.dropoff_location}\n"
+                    f"Vehicle: {reservation.vehicle}\n"
+                    f"Phone: {reservation.phone_number}"
+                )
+
+                send_whatsapp_message(
+                    "+9779821837931",
+                    message
+                )
+
                 return redirect(
                     "booking_confirmation",
                     reservation.confirmation_number
@@ -205,7 +223,6 @@ def make_reservation(request):
     # fallback
     # =========================
     return redirect("/reservation/?step=1")
-
 
 # -------------------
 # STRIPE SUCCESS

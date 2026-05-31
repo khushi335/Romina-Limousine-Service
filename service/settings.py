@@ -1,4 +1,3 @@
-.
 """
 Django settings for service project.
 
@@ -13,11 +12,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
-
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -26,9 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
-
-# ALLOWED_HOSTS = [ ]
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['rominalimousineservice.com','www.rominalimousineservice.com']
 
@@ -82,9 +78,9 @@ STRIPE_SECRET_KEY = "sk_live_xxx"
 STRIPE_WEBHOOK_SECRET = "whsec_xxx"
 STRIPE_PUBLIC_KEY = "pk_live_xxx"
 
-TWILIO_SID = "xxx"
-TWILIO_AUTH_TOKEN = "xxx"
-TWILIO_WHATSAPP = "whatsapp:+9779821837931"
+TWILIO_SID = config("TWILIO_SID")
+TWILIO_AUTH_TOKEN = config("TWILIO_AUTH_TOKEN")
+TWILIO_WHATSAPP = config("TWILIO_WHATSAPP")
 
 ADMIN_PHONES = [
     "ADMIN_PHONE_PLACEHOLDER",
